@@ -50,3 +50,10 @@ You will need the following to run this project:
    3. Click the LOAD UNPACKED button and select the `dist` directory.
 
 6. Profit! :tada:
+
+## Recommended VS Code Extensions for Development
+
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - for code formatting
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) - for autocomplete in Tailwind CSS classes
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - for linting and error checking
+- [Auto Complete Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-complete-tag) - for auto-completing any tags like in HTML or React
