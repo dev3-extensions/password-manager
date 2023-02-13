@@ -13,7 +13,7 @@ function App() {
   const generatePassword = () => {
     let password = ''
     const chars = '0123456789!@#$%^&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    for (let i = 0; i < PASSWORD_LENGTH.LONG; i++) {
+    for (let i = 0; i < PASSWORD_LENGTH.MEDIUM; i++) {
       let randomChar = Math.random() * chars.length
       password += chars.substring(randomChar, randomChar + 1)
     }
@@ -44,8 +44,37 @@ function App() {
             type="text"
             value={password}
             readOnly={true}
-            className="text-md w-full rounded-lg border border-[#404040] bg-[#262626] p-2.5 font-medium shadow-lg outline-none hover:ring-1 hover:ring-[#0465d3] focus:ring-2 focus:ring-[#0570eb]"
+            className="w-full rounded-lg border border-[#404040] bg-[#262626] p-2.5 font-medium shadow-lg outline-none hover:ring-1 hover:ring-[#0465d3] focus:ring-2 focus:ring-[#0570eb]"
           />
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-center">
+              <p className="font-medium text-[#aaaaaa]">Characters</p>
+              <input
+                type="text"
+                defaultValue={PASSWORD_LENGTH.MEDIUM}
+                className="ml-auto w-12 rounded-lg border border-[#404040] bg-[#1b1b1b] py-1 px-2 text-center text-white"
+              />
+            </div>
+            <hr className="h-px border-0 bg-[#3d3d3d]" />
+            <div className="flex items-center justify-center">
+              <p className="font-medium text-[#aaaaaa]">Numbers</p>
+              <input
+                type="checkbox"
+                defaultChecked={true}
+                className="ml-auto mr-4 h-4 w-4 rounded"
+              />
+            </div>
+            <hr className="h-px border-0 bg-[#3d3d3d]" />
+            <div className="flex items-center justify-center">
+              <p className="font-medium text-[#aaaaaa]">Symbols</p>
+              <input
+                type="checkbox"
+                defaultChecked={true}
+                className="ml-auto mr-4 h-4 w-4 rounded"
+              />
+            </div>
+          </div>
+          <p className="text-2xl font-semibold">Saved Passwords</p>
         </div>
       </div>
     </>
