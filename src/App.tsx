@@ -59,6 +59,9 @@ function App() {
             className="w-full rounded-lg border border-[#404040] bg-[#262626] p-2.5 font-medium shadow-lg outline-none hover:ring-1 hover:ring-[#0465d3] focus:ring-2 focus:ring-[#0570eb]"
           />
           <div className="flex flex-col gap-2">
+            <div>
+              <p className="text-2xl font-semibold text-white">Options</p>
+            </div>
             <div className="flex items-center justify-center">
               <p className="font-medium text-[#aaaaaa]">Characters</p>
               <input
