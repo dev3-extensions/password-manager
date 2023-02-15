@@ -12,16 +12,17 @@ class PasswordGenerator {
   readonly CHARACTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   /**
-   * Function used to generate random password using Math.Random
-   * TODO: implementing Crypto for better security
+   * Function used to generate random password using Crypto Library
    * @returns a randomly generated password.
    */
-  generatePassword() {
-    let password = ''
+  generatePassword(): string {
+    let password: string = ''
+    const array: Uint32Array = new Uint32Array(this.CHARS.length)
+    let randomValues: Uint32Array = crypto.getRandomValues(array)
 
     for (let i = 0; i < PASSWORD_LENGTH.MEDIUM; i++) {
-      let randomChar = Math.random() * this.CHARS.length
-      password += this.CHARS.substring(randomChar, randomChar + 1)
+      let random: number = randomValues[i] % this.CHARS.length
+      password += this.CHARS.substring(random, random + 1)
     }
     return password
   }
@@ -29,8 +30,9 @@ class PasswordGenerator {
   /**
    * It checks the complexity the user wants for the password.
    */
-  checkComplexity() {
-    /* TODO: Implementing this feature */
+  checkComplexity(): boolean {
+    // TODO: Implementing this feature
+    return false
   }
 
   /**
