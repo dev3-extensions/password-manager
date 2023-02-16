@@ -15,14 +15,31 @@ class PasswordGenerator {
    * Function used to generate random password using Crypto Library
    * @returns a randomly generated password.
    */
-  generatePassword(): string {
+  generatePassword(length: number, numbers: boolean, symbols: boolean): string {
     let password: string = ''
-    const array: Uint32Array = new Uint32Array(this.CHARS.length)
+    let chars = this.CHARACTERS
+    if (numbers) {
+      chars += this.NUMBERS
+    }
+    if (symbols) {
+      chars += this.SYMBOLS
+    }
+
+    const array: Uint32Array = new Uint32Array(chars.length)
     let randomValues: Uint32Array = crypto.getRandomValues(array)
 
-    for (let i = 0; i < PASSWORD_LENGTH.MEDIUM; i++) {
-      let random: number = randomValues[i] % this.CHARS.length
-      password += this.CHARS.substring(random, random + 1)
+    let passwordLength: number
+    if (length == 0) {
+      passwordLength = PASSWORD_LENGTH.SMALL
+    } else if (length == 1) {
+      passwordLength = PASSWORD_LENGTH.MEDIUM
+    } else {
+      passwordLength = PASSWORD_LENGTH.LONG
+    }
+
+    for (let i = 0; i < passwordLength; i++) {
+      let random: number = randomValues[i] % chars.length
+      password += chars.substring(random, random + 1)
     }
     return password
   }

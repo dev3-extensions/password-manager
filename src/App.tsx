@@ -9,13 +9,17 @@ import { PasswordGenerator } from './passwordGenerator'
 function App() {
   // State to store the password generated
   const [password, setPassword] = useState('')
+  // State to store password options
+  const [strengthOption, setStrengthOption] = useState(2)
+  const [numbersOption, setNumbersOption] = useState(true)
+  const [symbolsOption, setSymbolsOption] = useState(true)
 
   /**
    * Password handler to generate the password
    */
   const handlerGeneratePassword = () => {
     let generator = new PasswordGenerator()
-    setPassword(generator.generatePassword())
+    setPassword(generator.generatePassword(strengthOption, numbersOption, symbolsOption))
   }
 
   return (
@@ -29,7 +33,14 @@ function App() {
             <SaveButton />
           </div>
           <PasswordField password={password} />
-          <PasswordOptions />
+          <PasswordOptions
+            strengthOption={strengthOption}
+            setStrengthOption={setStrengthOption}
+            numbersOption={numbersOption}
+            setNumbersOption={setNumbersOption}
+            symbolsOption={symbolsOption}
+            setSymbolsOption={setSymbolsOption}
+          />
         </div>
       </div>
     </>

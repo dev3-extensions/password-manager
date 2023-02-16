@@ -1,11 +1,24 @@
 import { ChevronDown, Settings } from 'lucide-react'
 import React, { useState } from 'react'
 
-function PasswordOptions() {
+type PasswordOptionsProps = {
+  strengthOption: number
+  setStrengthOption: React.Dispatch<React.SetStateAction<number>>
+  numbersOption: boolean
+  setNumbersOption: React.Dispatch<React.SetStateAction<boolean>>
+  symbolsOption: boolean
+  setSymbolsOption: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function PasswordOptions({
+  strengthOption,
+  numbersOption,
+  symbolsOption,
+  setStrengthOption,
+  setNumbersOption,
+  setSymbolsOption,
+}: PasswordOptionsProps) {
   const [isOpen, setIsOpen] = useState(true)
-  const [strengthOption, setStrengthOption] = useState(2)
-  const [numbersOption, setNumbersOption] = useState(false)
-  const [symbolsOption, setSymbolsOption] = useState(false)
 
   const toggleOptions = () => {
     setIsOpen(!isOpen)
@@ -23,19 +36,19 @@ function PasswordOptions() {
           <div className="flex items-center justify-center">
             <p className="font-medium text-[#aaaaaa]">Strength</p>
             <input
-              onClick={() => setStrengthOption(0)}
+              onChange={() => setStrengthOption(0)}
               type="radio"
               name="strength"
               className="ml-auto mr-2  h-4 w-4 rounded"
             />
             <input
-              onClick={() => setStrengthOption(1)}
+              onChange={() => setStrengthOption(1)}
               type="radio"
               name="strength"
               className="mr-2 h-4 w-4 rounded"
             />
             <input
-              onClick={() => setStrengthOption(2)}
+              onChange={() => setStrengthOption(2)}
               type="radio"
               name="strength"
               defaultChecked={true}
@@ -45,7 +58,7 @@ function PasswordOptions() {
           <div className="flex items-center justify-center">
             <p className="font-medium text-[#aaaaaa]">Numbers</p>
             <input
-              onClick={() => setNumbersOption(!numbersOption)}
+              onChange={() => setNumbersOption(!numbersOption)}
               type="checkbox"
               defaultChecked={true}
               className="ml-auto mr-4 h-4 w-4 rounded"
@@ -54,7 +67,7 @@ function PasswordOptions() {
           <div className="flex items-center justify-center">
             <p className="font-medium text-[#aaaaaa]">Symbols</p>
             <input
-              onClick={() => setSymbolsOption(!symbolsOption)}
+              onChange={() => setSymbolsOption(!symbolsOption)}
               type="checkbox"
               defaultChecked={true}
               className="ml-auto mr-4 h-4 w-4 rounded"
