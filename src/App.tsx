@@ -1,4 +1,3 @@
-import { Check, ChevronDown, Copy, RefreshCw, Save, Settings } from 'lucide-react'
 import { useState } from 'react'
 import CopyButton from './components/CopyButton'
 import GenerateButton from './components/GenerateButton'
