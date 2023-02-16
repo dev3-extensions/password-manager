@@ -12,8 +12,12 @@ class PasswordGenerator {
   readonly CHARACTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   /**
-   * Function used to generate random password using Crypto Library
+   *  Function used to generate random password using Crypto Library
    * @returns a randomly generated password.
+   * @param length the length value of the password
+   * @param numbers using numbers flag
+   * @param symbols using symbols flag
+   * @returns the password generated
    */
   generatePassword(length: number, numbers: boolean, symbols: boolean): string {
     let password: string = ''
@@ -24,6 +28,8 @@ class PasswordGenerator {
     if (symbols) {
       chars += this.SYMBOLS
     }
+
+    // TODO: refactor into different functions
 
     const array: Uint32Array = new Uint32Array(chars.length)
     let randomValues: Uint32Array = crypto.getRandomValues(array)
@@ -37,6 +43,7 @@ class PasswordGenerator {
       passwordLength = PASSWORD_LENGTH.LONG
     }
 
+    // TODO: Bug - Forcing symbol or numbers when flag is on
     for (let i = 0; i < passwordLength; i++) {
       let random: number = randomValues[i] % chars.length
       password += chars.substring(random, random + 1)
