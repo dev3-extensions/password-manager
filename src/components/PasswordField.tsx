@@ -1,4 +1,11 @@
-function PasswordDisplayInput({ password }: { password: string }) {
+/**
+ * Type for the props of the PasswordDisplay component
+ */
+type PasswordFieldProps = {
+  password: string
+}
+
+function PasswordField({ password }: PasswordFieldProps) {
   return (
     <input
       id="password"
@@ -10,4 +17,4 @@ function PasswordDisplayInput({ password }: { password: string }) {
   )
 }
 
-export default PasswordDisplayInput
+export default PasswordField
