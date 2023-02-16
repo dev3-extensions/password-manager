@@ -2,6 +2,7 @@ import { useState } from 'react'
 import CopyButton from './components/CopyButton'
 import GenerateButton from './components/GenerateButton'
 import PasswordField from './components/PasswordField'
+import PasswordOptions from './components/PasswordOptions'
 import SaveButton from './components/SaveButton'
 import { PasswordGenerator } from './passwordGenerator'
 
@@ -28,6 +29,7 @@ function App() {
             <SaveButton />
           </div>
           <PasswordField password={password} />
+          <PasswordOptions />
         </div>
       </div>
     </>
