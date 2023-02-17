@@ -1,47 +1,31 @@
-import { PASSWORD_LENGTH } from './constants/passwordLength'
+import { PASSWORD_LENGTH } from "./constants/passwordLength";
 
 /**
  * Class representing a password generator.
  * It generates a random password based on the desired length
  */
 class PasswordGenerator {
-  // Readonly constant with all characters numbers and symbols
-  readonly CHARS = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  readonly NUMBERS = '0123456789'
-  readonly SYMBOLS = '!@#$%^&*()'
-  readonly CHARACTERS_LOWER = 'abcdefghijklmnopqrstuvwxyz'
-  readonly CHARACTERS_UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    // Readonly constant with all characters numbers and symbols
+    readonly CHARS = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    readonly NUMBERS = "0123456789";
+    readonly SYMBOLS = "!@#$%^&*()";
+    readonly CHARACTERS_LOWER = "abcdefghijklmnopqrstuvwxyz";
+    readonly CHARACTERS_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-  readonly caseNumber = 4
+    readonly caseNumber = 4;
 
-  /**
-   *  Function used to generate random password using Crypto Library
-   * @returns a randomly generated password.
-   * @param length the length value of the password
-   * @param numbers using numbers flag
-   * @param symbols using symbols flag
-   * @returns the password generated
-   */
-  generatePassword(length: number, numbers: boolean, symbols: boolean): string {
-    let password: string = ''
-    const arrayBuffer = new Uint8Array(1)
+    /**
+     *  Function used to generate random password using Crypto Library
+     * @returns a randomly generated password.
+     * @param length the length value of the password
+     * @param numbers using numbers flag
+     * @param symbols using symbols flag
+     * @returns the password generated
+     */
+    generatePassword(length: number, numbers: boolean, symbols: boolean): string {
+        let password: string = "";
 
-    for (let i = 0; i < length; i++) {
-      // Select the pool MAX 4
-      let selectPool = crypto.getRandomValues(arrayBuffer)[0] % this.caseNumber
-      switch (selectPool) {
-        case 0:
-        // TODO: forcing numbers with Up and Lower
-
-        case 1:
-        // TODO: forcing symbols with Up and Lower
-
-        default:
-        // TODO: Just characters
-      }
-    }
-    return password
-    /*
+        /*
     let chars = this.CHARS
     if (numbers) {
       chars += this.NUMBERS
@@ -71,22 +55,22 @@ class PasswordGenerator {
     }
     return password
     */
-  }
+    }
 
-  /**
-   * It checks the complexity the user wants for the password.
-   */
-  checkComplexity(): boolean {
-    // TODO: Implementing this feature
-    return false
-  }
+    /**
+     * It checks the complexity the user wants for the password.
+     */
+    checkComplexityElement(password: string, array): boolean {
+        let passwordArray = password.split("");
+        return passwordArray.some((r) => array(r));
+    }
 
-  generateRandom(max: number) {}
+    generateRandom(max: number) {}
 
-  /**
-   * Empty constructor for the class
-   */
-  constructor() {}
+    /**
+     * Empty constructor for the class
+     */
+    constructor() {}
 }
 
-export { PasswordGenerator }
+export { PasswordGenerator };
