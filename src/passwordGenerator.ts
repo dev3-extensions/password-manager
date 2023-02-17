@@ -133,9 +133,9 @@ class PasswordGenerator {
     }
   }
 
-  /**
-   * Empty constructor for the class
-   */
+  /***********************************\
+  |* Empty constructor for the class *|
+  \***********************************/
   constructor() {}
 }
 
