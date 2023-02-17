@@ -85,7 +85,7 @@ class PasswordGenerator {
    * @param charArray the Array of string to shuffle
    * @returns a shuffled array
    */
-  shuffleList(charArray: string[]) {
+  shuffleList(charArray: string[]): string[] {
     for (let i = charArray.length - 1; i > 0; i--) {
       // Generating random index to swap
       const swapIndex = this.randomNumber(charArray.length)
@@ -111,7 +111,7 @@ class PasswordGenerator {
    * @param maxValue the maximum value randomly generated
    * @returns a random integer between 0 and maxValue
    */
-  randomNumber(maxValue: number) {
+  randomNumber(maxValue: number): number {
     const noBytes = Math.ceil(Math.log2(maxValue / 8))
     if (!noBytes) {
       return 0
