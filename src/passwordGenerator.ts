@@ -75,7 +75,8 @@ class PasswordGenerator {
     } // End of While
 
     // Shuffling the list and returning
-    return (password = this.shuffleList(charPool).join(''))
+    password = this.shuffleList(charPool).join('')
+    return password
   } // End of Method
 
   /**
@@ -111,6 +112,9 @@ class PasswordGenerator {
    */
   randomNumber(maxValue: number) {
     const noBytes = Math.ceil(Math.log2(maxValue / 8))
+    if (!noBytes) {
+      return 0
+    }
 
     const maxNum = Math.pow(256, noBytes)
     const bufferArray = new Uint8Array(noBytes)
@@ -122,7 +126,8 @@ class PasswordGenerator {
         value = (value << 8) + bufferArray[i]
       }
       if (value < maxNum - (maxNum % maxValue)) {
-        return value % maxValue
+        // Absolute value to avoid signed bits
+        return Math.abs(value % maxValue)
       }
     }
   }
