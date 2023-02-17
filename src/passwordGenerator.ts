@@ -1,17 +1,13 @@
 import { PASSWORD_LENGTH } from './constants/passwordLength'
-
+const NUMBERS = '0123456789'
+const SYMBOLS = '!@#$%^&*()'
+const CHARACTERS_LOWER = 'abcdefghijklmnopqrstuvwxyz'
+const CHARACTERS_UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 /**
  * Class representing a password generator.
  * It generates a random password based on the desired length
  */
 class PasswordGenerator {
-  // Readonly constant with all characters numbers and symbols
-  readonly CHARS = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  readonly NUMBERS = '0123456789'
-  readonly SYMBOLS = '!@#$%^&*()'
-  readonly CHARACTERS_LOWER = 'abcdefghijklmnopqrstuvwxyz'
-  readonly CHARACTERS_UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
   readonly caseNumber = 4
 
   /**
@@ -53,24 +49,6 @@ class PasswordGenerator {
       let random: number = randomValues[i] % chars.length
       password += chars.substring(random, random + 1)
     }
-
-    if (numbers) {
-      if (!this.checkComplexityElement(password, this.NUMBERS.split(''))) {
-        // TODO: change a random character to a number
-        password.replace(
-          password.charAt(Math.random() * (password.length - 1)),
-          this.NUMBERS.charAt(Math.random() * (this.NUMBERS.length - 1))
-        )
-      } else return password
-    } else if (symbols) {
-      if (!this.checkComplexityElement(password, this.SYMBOLS.split(''))) {
-        // TODO: change a random character to a number
-        password.replace(
-          password.charAt(Math.random() * (password.length - 1)),
-          this.SYMBOLS.charAt(Math.random() * (this.SYMBOLS.length - 1))
-        )
-      } else return password
-    }
     return password
   }
 
@@ -80,6 +58,29 @@ class PasswordGenerator {
   checkComplexityElement(password: string, array): boolean {
     let passwordArray = password.split('')
     return passwordArray.some((r) => array(r))
+  }
+
+  /**
+   * Method which generates a random integer between 0 and Max
+   * @param maxValue the maximum value randomly generated
+   * @returns a random integer between 0 and maxValue
+   */
+  randomNumber(maxValue: number) {
+    const noBytes = Math.ceil(Math.log2(maxValue / 8))
+
+    const maxNum = Math.pow(256, noBytes)
+    const bufferArray = new Uint8Array(noBytes)
+
+    while (true) {
+      crypto.getRandomValues(bufferArray)
+      let value = 0
+      for (let i = 0; i < noBytes; i++) {
+        value = (value << 8) + bufferArray[i]
+      }
+      if (value < maxNum - (maxNum % maxValue)) {
+        return value % maxValue
+      }
+    }
   }
 
   generateRandom(max: number) {}
