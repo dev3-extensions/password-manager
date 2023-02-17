@@ -10,8 +10,6 @@ const PASSWORD_OPTIONS = {
   CHARACTERS_UPPER: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 }
 
-let isSymbol: boolean = false
-let isNumber: boolean = false
 let passwordLength: number
 
 /**
@@ -28,6 +26,9 @@ class PasswordGenerator {
    * @returns the password generated
    */
   generatePassword(length: number, numbers: boolean, symbols: boolean): string {
+    // Flags to determine if symbols or numbers have been used
+    let isSymbol: boolean = false
+    let isNumber: boolean = false
     // Initial empty password
     let password: string = ''
     let availableChars = PASSWORD_OPTIONS.CHARACTERS_LOWER + PASSWORD_OPTIONS.CHARACTERS_UPPER
