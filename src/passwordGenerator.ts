@@ -10,13 +10,15 @@ const PASSWORD_OPTIONS = {
   CHARACTERS_UPPER: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 }
 
+let isSymbol: boolean = false
+let isNumber: boolean = false
+let passwordLength: number
+
 /**
  * Class representing a password generator.
  * It generates a random password based on the desired length
  */
 class PasswordGenerator {
-  readonly caseNumber = 4
-
   /**
    *  Function used to generate random password using Crypto Library
    * @returns a randomly generated password.
@@ -28,22 +30,53 @@ class PasswordGenerator {
   generatePassword(length: number, numbers: boolean, symbols: boolean): string {
     // Initial empty password
     let password: string = ''
+    let availableChars = PASSWORD_OPTIONS.CHARACTERS_LOWER + PASSWORD_OPTIONS.CHARACTERS_UPPER
+
+    switch (length) {
+      case 0:
+        passwordLength = PASSWORD_LENGTH.SMALL
+        break
+
+      case 1:
+        passwordLength = PASSWORD_LENGTH.MEDIUM
+        break
+
+      case 2:
+        passwordLength = PASSWORD_LENGTH.LONG
+        break
+    }
 
     // The characters pool
-    const charPool = []
+    const charPool: string[] = []
 
     if (numbers && symbols) {
-      let availableChars =
-        PASSWORD_OPTIONS.NUMBERS +
-        PASSWORD_OPTIONS.SYMBOLS +
-        PASSWORD_OPTIONS.CHARACTERS_LOWER +
-        PASSWORD_OPTIONS.CHARACTERS_UPPER
-
-      // Adding numbers and symbols
-      //password += PASSWORD_OPTIONS.NUMBERS + PASSWORD_OPTIONS.SYMBOLS
-      charPool.push(this.genRandomChar(availableChars))
+      availableChars += PASSWORD_OPTIONS.NUMBERS + PASSWORD_OPTIONS.SYMBOLS
+    } else if (numbers) {
+      availableChars += PASSWORD_OPTIONS.NUMBERS
+    } else if (symbols) {
+      availableChars += PASSWORD_OPTIONS.SYMBOLS
     }
-  }
+
+    // Adding numbers and symbols
+    while (charPool.length < passwordLength) {
+      // Checking if number has been added
+      if (numbers && !isNumber) {
+        charPool.push(this.genRandomChar(PASSWORD_OPTIONS.NUMBERS))
+        isNumber = true
+      }
+
+      // Checking if symbol as been added
+      if (symbols && !isSymbol) {
+        charPool.push(this.genRandomChar(PASSWORD_OPTIONS.SYMBOLS))
+        isSymbol = true
+      } else {
+        charPool.push(this.genRandomChar(availableChars))
+      }
+    } // End of While
+
+    // Shuffling the list and returning
+    return (password = this.shuffleList(charPool).join(''))
+  } // End of Method
 
   /**
    * It shuffles characters among random index
@@ -54,6 +87,7 @@ class PasswordGenerator {
     for (let i = charArray.length - 1; i > 0; i--) {
       // Generating random index to swap
       const swapIndex = this.randomNumber(charArray.length)
+      // The character to swap
       const charToSwap = charArray[i]
       charArray[i] = charArray[swapIndex]
       charArray[swapIndex] = charToSwap
