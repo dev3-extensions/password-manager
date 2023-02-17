@@ -9,7 +9,10 @@ class PasswordGenerator {
   readonly CHARS = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   readonly NUMBERS = '0123456789'
   readonly SYMBOLS = '!@#$%^&*()'
-  readonly CHARACTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  readonly CHARACTERS_LOWER = 'abcdefghijklmnopqrstuvwxyz'
+  readonly CHARACTERS_UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+  readonly caseNumber = 4
 
   /**
    *  Function used to generate random password using Crypto Library
@@ -21,7 +24,25 @@ class PasswordGenerator {
    */
   generatePassword(length: number, numbers: boolean, symbols: boolean): string {
     let password: string = ''
-    let chars = this.CHARACTERS
+    const arrayBuffer = new Uint8Array(1)
+
+    for (let i = 0; i < length; i++) {
+      // Select the pool MAX 4
+      let selectPool = crypto.getRandomValues(arrayBuffer)[0] % this.caseNumber
+      switch (selectPool) {
+        case 0:
+        // TODO: forcing numbers with Up and Lower
+
+        case 1:
+        // TODO: forcing symbols with Up and Lower
+
+        default:
+        // TODO: Just characters
+      }
+    }
+    return password
+    /*
+    let chars = this.CHARS
     if (numbers) {
       chars += this.NUMBERS
     }
@@ -49,6 +70,7 @@ class PasswordGenerator {
       password += chars.substring(random, random + 1)
     }
     return password
+    */
   }
 
   /**
@@ -58,6 +80,8 @@ class PasswordGenerator {
     // TODO: Implementing this feature
     return false
   }
+
+  generateRandom(max: number) {}
 
   /**
    * Empty constructor for the class
