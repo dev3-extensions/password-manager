@@ -10,7 +10,7 @@ function App() {
   // State to store the password generated
   const [password, setPassword] = useState('')
   // State to store password options
-  const [strengthOption, setStrengthOption] = useState(2)
+  const [strengthOption, setStrengthOption] = useState(1)
   const [numbersOption, setNumbersOption] = useState(true)
   const [symbolsOption, setSymbolsOption] = useState(true)
 
@@ -34,11 +34,8 @@ function App() {
           </div>
           <PasswordField password={password} />
           <PasswordOptions
-            strengthOption={strengthOption}
             setStrengthOption={setStrengthOption}
-            numbersOption={numbersOption}
             setNumbersOption={setNumbersOption}
-            symbolsOption={symbolsOption}
             setSymbolsOption={setSymbolsOption}
           />
         </div>
