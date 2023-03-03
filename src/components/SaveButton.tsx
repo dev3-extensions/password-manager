@@ -2,7 +2,11 @@ import { Save } from 'lucide-react'
 
 const SaveButton = () => {
   return (
-    <button className="rounded-lg border border-[#404040] bg-[#313131] px-3 py-2 font-medium shadow-lg hover:bg-[#254262]">
+    <button
+      type="button"
+      aria-label="Save Password"
+      className="rounded-lg border border-neutral-700 bg-neutral-700/50 px-3 py-2 font-medium shadow-lg hover:bg-blue-500/25"
+    >
       <Save size={18} />
     </button>
   )
