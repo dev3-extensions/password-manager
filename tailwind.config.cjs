@@ -7,7 +7,11 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-  },
+      },
     },
   },
+  plugins: [
+    // Initialize with default values (see options below)
+    require('tailwindcss-radix')(),
+  ],
 }

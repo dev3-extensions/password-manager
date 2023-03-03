@@ -28,7 +28,7 @@ const CopyButton = ({ password }: CopyButtonProps) => {
 
   return (
     <button
-      className="ml-auto rounded-lg border border-[#404040] bg-[#313131] px-3 py-2 shadow-lg hover:bg-[#254262]"
+      className="ml-auto rounded-lg border border-neutral-700 bg-neutral-700/50 px-3 py-2 shadow-lg hover:bg-blue-500/25"
       onClick={copyPassword}
     >
       {/* Conditionally render the copy or check icon */}

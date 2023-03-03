@@ -12,7 +12,7 @@ function GenerateButton({ handler }: GenerateButtonProps) {
     <button
       onClick={handler}
       id="generate"
-      className="flex items-center justify-center gap-2 rounded-lg border border-[#404040] bg-[#0570eb] px-4 py-2 font-medium shadow-lg hover:bg-[#0465d3]"
+      className="flex items-center justify-center gap-2 rounded-lg border border-neutral-700 bg-blue-600 px-4 py-2 font-semibold shadow-lg hover:bg-blue-600/90"
     >
       <RefreshCw size={18} />
       Generate

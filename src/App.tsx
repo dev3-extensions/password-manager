@@ -24,9 +24,9 @@ function App() {
 
   return (
     <>
-      <div className="min-h-[500px] w-[350px] bg-[#262626] text-white">
-        <div className="m-4 flex flex-col gap-4">
-          <p className="text-2xl font-semibold">Password Manager</p>
+      <div className="min-h-[500px] w-[370px] bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-white">
+        <div className="flex flex-col gap-4 p-4">
+          <p className="my-1.5 text-3xl font-bold">Password Manager</p>
           <div className="flex gap-2">
             <GenerateButton handler={handlerGeneratePassword} />
             <CopyButton password={password} />
