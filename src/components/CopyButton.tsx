@@ -28,6 +28,8 @@ const CopyButton = ({ password }: CopyButtonProps) => {
 
   return (
     <button
+      type="button"
+      aria-label="Copy Password"
       className="ml-auto rounded-lg border border-neutral-700 bg-neutral-700/50 px-3 py-2 shadow-lg hover:bg-blue-500/25"
       onClick={copyPassword}
     >
