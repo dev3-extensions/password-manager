@@ -3,7 +3,7 @@ import { RefreshCw } from 'lucide-react'
 /**
  * Type for the props of the GenerateButton component
  */
-type GenerateButtonProps = {
+interface GenerateButtonProps {
   handler: () => void
 }
 

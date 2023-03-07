@@ -1,6 +1,6 @@
 import { Save } from 'lucide-react'
 
-const SaveButton = () => {
+function SaveButton() {
   return (
     <button
       type="button"

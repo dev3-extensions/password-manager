@@ -1,9 +1,9 @@
 import { ChevronDown, ChevronUp, Settings } from 'lucide-react'
 import React, { useState } from 'react'
-import { Slider } from './ui/Slider'
-import { Switch } from './ui/Switch'
+import Slider from './ui/Slider'
+import Switch from './ui/Switch'
 
-type PasswordOptionsProps = {
+interface PasswordOptionsProps {
   setStrengthOption: React.Dispatch<React.SetStateAction<number>>
   setNumbersOption: React.Dispatch<React.SetStateAction<boolean>>
   setSymbolsOption: React.Dispatch<React.SetStateAction<boolean>>
@@ -16,7 +16,7 @@ function PasswordOptions({
 }: PasswordOptionsProps) {
   const [isOpen, setIsOpen] = useState(true)
 
-  const toggleOptions = () => {
+  function toggleOptions() {
     setIsOpen((prev) => !prev)
   }
 
