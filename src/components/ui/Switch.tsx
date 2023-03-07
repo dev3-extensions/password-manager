@@ -13,8 +13,8 @@ function Switch({ onCheckedChange, defaultChecked }: SwitchProps) {
       defaultChecked={defaultChecked}
       className={clsx(
         'group',
-        'radix-state-checked:bg-blue-500',
-        'radix-state-unchecked:bg-gray-200 dark:radix-state-unchecked:bg-neutral-600',
+        'radix-state-checked:bg-blue-500 hover:radix-state-checked:bg-blue-600',
+        'radix-state-unchecked:bg-gray-300 hover:radix-state-unchecked:bg-gray-400 dark:radix-state-unchecked:bg-neutral-600 hover:dark:radix-state-unchecked:bg-neutral-700',
         'relative inline-flex h-[24px] w-[44px] flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out',
         'focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75'
       )}

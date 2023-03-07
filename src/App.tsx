@@ -24,7 +24,7 @@ function App() {
 
   return (
     <>
-      <div className="min-h-[500px] w-[370px] bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-white">
+      <div className="min-h-[500px] w-[370px] bg-neutral-100 dark:bg-neutral-900">
         <div className="flex flex-col gap-4 p-4">
           <p className="my-1.5 text-3xl font-bold">Password Manager</p>
           <div className="flex gap-2">
