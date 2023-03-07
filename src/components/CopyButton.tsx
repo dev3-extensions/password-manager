@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { Check, Copy } from 'lucide-react'
 import React from 'react'
 
@@ -30,7 +31,11 @@ function CopyButton({ password }: CopyButtonProps) {
     <button
       type="button"
       aria-label="Copy Password"
-      className="ml-auto rounded-lg border border-neutral-700 bg-neutral-700/50 px-3 py-2 shadow-lg hover:bg-blue-500/25"
+      className={clsx(
+        'ml-auto rounded-lg border px-3 py-2 shadow-lg hover:bg-blue-500/25',
+        'border-neutral-400/50 bg-neutral-300/50',
+        'dark:border-neutral-600/50 dark:bg-neutral-700/50'
+      )}
       onClick={copyPassword}
     >
       {/* Conditionally render the copy or check icon */}

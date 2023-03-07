@@ -24,7 +24,7 @@ function PasswordOptions({
     <div className="flex flex-col gap-3">
       <div onClick={toggleOptions} className="flex items-center gap-2 rounded">
         <Settings size={18} />
-        <p className="text-lg font-semibold text-white">Options</p>
+        <p className="text-lg font-semibold">Options</p>
         {isOpen ? (
           <ChevronUp size={18} className="ml-auto" />
         ) : (
@@ -34,19 +34,19 @@ function PasswordOptions({
       {isOpen && (
         <>
           <div className="flex items-center justify-center">
-            <p className="font-medium text-neutral-300">Strength</p>
+            <p className="font-medium text-neutral-700 dark:text-neutral-300">Strength</p>
             <div className="ml-auto">
               <Slider setStrengthOption={setStrengthOption} />
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <p className="font-medium text-neutral-300">Numbers</p>
+            <p className="font-medium text-neutral-700 dark:text-neutral-300">Numbers</p>
             <div className="ml-auto">
               <Switch onCheckedChange={setNumbersOption} defaultChecked={true} />
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <p className="font-medium text-neutral-300">Symbols</p>
+            <p className="font-medium text-neutral-700 dark:text-neutral-300">Symbols</p>
             <div className="ml-auto">
               <Switch onCheckedChange={setSymbolsOption} defaultChecked={true} />
             </div>

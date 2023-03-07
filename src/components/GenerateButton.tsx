@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { RefreshCw } from 'lucide-react'
 
 /**
@@ -14,7 +15,11 @@ function GenerateButton({ handler }: GenerateButtonProps) {
       aria-label="Generate Password"
       onClick={handler}
       id="generate"
-      className="flex items-center justify-center gap-2 rounded-lg border border-neutral-700 bg-blue-600 px-4 py-2 font-semibold shadow-lg hover:bg-blue-600/90"
+      className={clsx(
+        'flex items-center gap-2 rounded-lg border px-4 py-2 font-semibold text-white shadow-lg ',
+        'bg-blue-600 hover:bg-blue-600/90 active:bg-blue-700',
+        'border-neutral-300/50 dark:border-neutral-700'
+      )}
     >
       <RefreshCw size={18} />
       Generate
