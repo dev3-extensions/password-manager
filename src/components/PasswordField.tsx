@@ -1,7 +1,7 @@
 /**
  * Type for the props of the PasswordDisplay component
  */
-type PasswordFieldProps = {
+interface PasswordFieldProps {
   password: string
 }
 

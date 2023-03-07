@@ -4,18 +4,18 @@ import React from 'react'
 /**
  * Type for the props of the CopyButton component
  */
-type CopyButtonProps = {
+interface CopyButtonProps {
   password: string
 }
 
-const CopyButton = ({ password }: CopyButtonProps) => {
+function CopyButton({ password }: CopyButtonProps) {
   const [copyStatus, setCopyStatus] = React.useState(false)
 
   /**
    *
    * Function to copy the password to the clipboard
    */
-  const copyPassword = () => {
+  function copyPassword() {
     navigator.clipboard.writeText(password)
 
     // Set the copy status to true and then set it to false after 1 second

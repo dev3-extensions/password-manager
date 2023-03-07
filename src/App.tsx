@@ -17,7 +17,7 @@ function App() {
   /**
    * Password handler to generate the password
    */
-  const handlerGeneratePassword = () => {
+  function handlerGeneratePassword(): void {
     let generator = new PasswordGenerator()
     setPassword(generator.generatePassword(strengthOption, numbersOption, symbolsOption))
   }

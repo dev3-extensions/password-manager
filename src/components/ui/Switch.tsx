@@ -1,12 +1,12 @@
 import * as SwitchPrimitive from '@radix-ui/react-switch'
 import { clsx } from 'clsx'
 
-type SwitchProps = {
+interface SwitchProps {
   onCheckedChange: React.Dispatch<React.SetStateAction<boolean>>
   defaultChecked: boolean
 }
 
-const Switch = ({ onCheckedChange, defaultChecked }: SwitchProps) => {
+function Switch({ onCheckedChange, defaultChecked }: SwitchProps) {
   return (
     <SwitchPrimitive.Root
       onCheckedChange={onCheckedChange}
@@ -30,4 +30,4 @@ const Switch = ({ onCheckedChange, defaultChecked }: SwitchProps) => {
   )
 }
 
-export { Switch }
+export default Switch
