@@ -1,48 +1,38 @@
-import { getRandomValues, subtle } from 'crypto'
+import CryptoJS from 'crypto-js'
 
-const encoder = new TextEncoder()
+// Salt generated from random wordarray
+let salt = CryptoJS.lib.WordArray.random(256)
 
 /**
- * It gets a PBKDF2 key to be used to derive an AES-CBC key
- * @param secret the string to encode to generate the key from
+ * Generating a key using PBKDF2 to not have a plain text passphrase
+ * TODO: Implement safer and more complex way
  */
-const getPasswordKey = (secret: string) => {
-  subtle.importKey('raw', encoder.encode(secret), 'PBKDF2', false, ['deriveKey'])
-}
+let key256Bit = CryptoJS.PBKDF2('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', salt, {
+  keySize: 256,
+  iterations: 10000,
+}).toString()
 
-// TODO: Implement these methods - to derive the key using AES from master password
-// Documentation here -> https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveKey
-const deriveKey = (passwordKey: CryptoKey, salt, keyUsage) => {
-  window.crypto.subtle.deriveKey(
-    {
-      name: 'PBKDF2',
-      salt: salt,
-      iterations: 100000,
-      hash: 'SHA-256',
-    },
-    passwordKey,
-    { name: 'AES-CBC', length: 256 },
-    false,
-    keyUsage
-  )
+/**
+ * It encrypts a string using AES-256 bit encryption
+ * @param input The password to encrypt
+ * @returns an encrypted string
+ */
+const encrypt = (input: string) => {
+  const encryptedText = CryptoJS.AES.encrypt(input, key256Bit)
+  console.log(encryptedText.toString())
+  console.log(key256Bit)
+  return encryptedText.toString()
 }
 
 /**
- * Encodes the password using UTF-8
- * @param password the password to encode
- * @returns a buffer array from password encoded
+ * It decrypts a string using the cipher provided
+ * @param ciphertext the cipher to decrypt the password
+ * @returns a plain string with original password
  */
-const getPasswordEncoding = (password: string) => {
-  return encoder.encode(password)
+const decrypt = (ciphertext: string | CryptoJS.lib.CipherParams) => {
+  const bytes = CryptoJS.AES.decrypt(ciphertext, key256Bit)
+  const originalText = bytes.toString(CryptoJS.enc.Utf8)
+  return originalText
 }
 
-const encrypt = () => {
-  // TODO: Implement this method
-  const iv = crypto.getRandomValues(new Uint16Array(16))
-}
-
-const decrypt = (hashed: string) => {
-  // TODO: implement the decryption method
-}
-
-export {}
+export { encrypt, decrypt }
