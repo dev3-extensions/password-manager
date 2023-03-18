@@ -10,22 +10,14 @@ function App() {
   // State to store the password generated
   const [password, setPassword] = useState('')
   // State to store password options
-<<<<<<< HEAD
-  const [strengthOption, setStrengthOption] = useState(2)
-=======
   const [strengthOption, setStrengthOption] = useState(1)
->>>>>>> main
   const [numbersOption, setNumbersOption] = useState(true)
   const [symbolsOption, setSymbolsOption] = useState(true)
 
   /**
    * Password handler to generate the password
    */
-<<<<<<< HEAD
-  const handlerGeneratePassword = () => {
-=======
   function handlerGeneratePassword(): void {
->>>>>>> main
     let generator = new PasswordGenerator()
     setPassword(generator.generatePassword(strengthOption, numbersOption, symbolsOption))
   }
@@ -42,16 +34,8 @@ function App() {
           </div>
           <PasswordField password={password} />
           <PasswordOptions
-<<<<<<< HEAD
-            strengthOption={strengthOption}
-            setStrengthOption={setStrengthOption}
-            numbersOption={numbersOption}
-            setNumbersOption={setNumbersOption}
-            symbolsOption={symbolsOption}
-=======
             setStrengthOption={setStrengthOption}
             setNumbersOption={setNumbersOption}
->>>>>>> main
             setSymbolsOption={setSymbolsOption}
           />
         </div>
