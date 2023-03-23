@@ -1,6 +1,8 @@
 import { Check, Copy } from 'lucide-react'
 import React from 'react'
 import clsx from 'clsx'
+import { decrypt, encrypt } from '../EncrypHandler'
+import { enc } from 'crypto-js'
 
 /**
  * Type for the props of the CopyButton component
@@ -18,6 +20,10 @@ function CopyButton({ password }: CopyButtonProps) {
    */
   function copyPassword() {
     navigator.clipboard.writeText(password)
+    let encryptedPassword = encrypt(password)
+    console.log('Encrypted Password = ' + encryptedPassword.toString())
+    console.log('IV = ' + encryptedPassword.iv)
+    console.log(decrypt(encryptedPassword))
 
     // Set the copy status to true and then set it to false after 1 second
     setCopyStatus(true)

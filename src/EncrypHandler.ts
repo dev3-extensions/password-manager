@@ -1,16 +1,24 @@
 import CryptoJS from 'crypto-js'
+import { PasswordGenerator } from './passwordGenerator'
+
+let pg = new PasswordGenerator()
+
+// The passphrase used to generate the key
+let passphrase = pg.generatePassword(32, true, true)
 
 // Salt generated from random wordarray
 let salt = CryptoJS.lib.WordArray.random(256)
 
 /**
  * Generating a key using PBKDF2 to not have a plain text passphrase
- * TODO: Implement safer and more complex way
  */
-let key256Bit = CryptoJS.PBKDF2('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', salt, {
+let key256Bit: string = CryptoJS.PBKDF2(passphrase, salt, {
   keySize: 256,
   iterations: 10000,
 }).toString()
+
+// Encoding the key
+let key: string = CryptoJS.enc.Hex.parse(key256Bit).toString()
 
 /**
  * It encrypts a string using AES-256 bit encryption
@@ -18,10 +26,11 @@ let key256Bit = CryptoJS.PBKDF2('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', salt, {
  * @returns an encrypted string
  */
 const encrypt = (input: string) => {
-  const encryptedText = CryptoJS.AES.encrypt(input, key256Bit)
-  console.log(encryptedText.toString())
-  console.log(key256Bit)
-  return encryptedText.toString()
+  const encryptedText = CryptoJS.AES.encrypt(input, key, {
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Iso97971,
+  })
+  return encryptedText
 }
 
 /**
@@ -30,7 +39,10 @@ const encrypt = (input: string) => {
  * @returns a plain string with original password
  */
 const decrypt = (ciphertext: string | CryptoJS.lib.CipherParams) => {
-  const bytes = CryptoJS.AES.decrypt(ciphertext, key256Bit)
+  const bytes = CryptoJS.AES.decrypt(ciphertext, key, {
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Iso97971,
+  })
   const originalText = bytes.toString(CryptoJS.enc.Utf8)
   return originalText
 }

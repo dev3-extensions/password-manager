@@ -4,6 +4,7 @@ import GenerateButton from './components/GenerateButton'
 import PasswordField from './components/PasswordField'
 import PasswordOptions from './components/PasswordOptions'
 import SaveButton from './components/SaveButton'
+import { encrypt, decrypt } from './EncrypHandler'
 import { PasswordGenerator } from './passwordGenerator'
 
 function App() {
