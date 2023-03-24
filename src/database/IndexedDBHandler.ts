@@ -19,6 +19,8 @@ function AddEntry(entry: Password) {
       autoIncrement: true,
     })
     index = store.createIndex('NAME', 'NAME', { unique: true })
+
+    store.put({ NAME: entry.name, PASSWORD: entry.password, URL: entry.url })
   }
 }
 

@@ -2,6 +2,7 @@
  * Representing a password object
  * A password has a Name for identifying the website, the encrypted password and an URL
  */
+
 class Password {
   name: string
   password: string
