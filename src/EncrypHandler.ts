@@ -4,6 +4,7 @@ import { PasswordGenerator } from './passwordGenerator'
 let pg = new PasswordGenerator()
 
 // The passphrase used to generate the key
+// TODO: Might generate a bug
 let passphrase = pg.generatePassword(32, true, true)
 
 // Salt generated from random wordarray
