@@ -2,7 +2,7 @@ import { decrypt, encrypt } from '../EncrypHandler'
 import { Password } from '../model/Password'
 
 // Constants to be used
-const DB_NAME = 'passwords-list-db'
+const DB_NAME = 'passwords-list'
 const DB_STORE = 'passwords'
 
 /**
