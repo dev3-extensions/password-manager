@@ -1,9 +1,4 @@
 import { useState } from 'react'
-import GenerateButton from './components/GenerateButton'
-import PasswordField from './components/PasswordField'
-import PasswordOptions from './components/PasswordOptions'
-import SaveButton from './components/SaveButton'
-import { PasswordGenerator } from './passwordGenerator'
 import { Link } from 'react-chrome-extension-router'
 import CopyButton from '../components/CopyButton'
 import GenerateButton from '../components/GenerateButton'
@@ -37,7 +32,7 @@ function App() {
           <div className="flex gap-2">
             <GenerateButton handler={handlerGeneratePassword} />
             <CopyButton password={password} />
-            <SaveButton />
+            <DialogRadix buttonText="Save to Database" />
           </div>
           <PasswordField password={password} />
           <PasswordOptions
@@ -45,6 +40,11 @@ function App() {
             setNumbersOption={setNumbersOption}
             setSymbolsOption={setSymbolsOption}
           />
+          <Link component={SavedPasswords}>
+            <button className="rounded bg-neutral-600 px-4 py-2 hover:bg-neutral-700">
+              Saved Passwords
+            </button>
+          </Link>
         </div>
       </div>
     </>
