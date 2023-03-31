@@ -1,15 +1,10 @@
 import { useState } from 'react'
-import { Link } from 'react-chrome-extension-router'
-import CopyButton from '../components/CopyButton'
-import GenerateButton from '../components/GenerateButton'
-import PasswordField from '../components/PasswordField'
-import PasswordOptions from '../components/PasswordOptions'
-import SaveButton from '../components/SaveButton'
-import MyModal from '../components/ui/DialogHeadless'
-import DialogRadix from '../components/ui/DialogRadix'
-import { DialogRadixTW } from '../components/ui/DialogRadixTW'
-import { PasswordGenerator } from '../passwordGenerator'
-import SavedPasswords from './SavedPasswords'
+import CopyButton from './components/CopyButton'
+import GenerateButton from './components/GenerateButton'
+import PasswordField from './components/PasswordField'
+import PasswordOptions from './components/PasswordOptions'
+import SaveButton from './components/SaveButton'
+import { PasswordGenerator } from './passwordGenerator'
 
 function App() {
   // State to store the password generated
@@ -35,7 +30,7 @@ function App() {
           <div className="flex gap-2">
             <GenerateButton handler={handlerGeneratePassword} />
             <CopyButton password={password} />
-            <DialogRadix buttonText="Save to Database" />
+            <SaveButton />
           </div>
           <PasswordField password={password} />
           <PasswordOptions
@@ -43,11 +38,6 @@ function App() {
             setNumbersOption={setNumbersOption}
             setSymbolsOption={setSymbolsOption}
           />
-          <Link component={SavedPasswords}>
-            <button className="rounded bg-neutral-600 px-4 py-2 hover:bg-neutral-700">
-              Saved Passwords
-            </button>
-          </Link>
         </div>
       </div>
     </>
