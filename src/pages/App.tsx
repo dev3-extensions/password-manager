@@ -15,6 +15,10 @@ function App() {
   const [strengthOption, setStrengthOption] = useState(1)
   const [numbersOption, setNumbersOption] = useState(true)
   const [symbolsOption, setSymbolsOption] = useState(true)
+  // Password state
+  const [passwordInfo, setPasswordInfo] = useState({ name: '', password: '', url: '' })
+  // Password name state
+  const [passwordName, setPasswordName] = useState('')
 
   /**
    * Password handler to generate the password
@@ -24,6 +28,8 @@ function App() {
     setPassword(generator.generatePassword(strengthOption, numbersOption, symbolsOption))
   }
 
+  // setPasswordInfo({ name: 'ab', password: password, url: 'asda' })
+
   return (
     <>
       <div className="min-h-[500px] w-[370px] bg-neutral-100 dark:bg-neutral-900">
@@ -32,7 +38,11 @@ function App() {
           <div className="flex gap-2">
             <GenerateButton handler={handlerGeneratePassword} />
             <CopyButton password={password} />
-            <DialogRadix buttonText="Save to Database" />
+            <DialogRadix
+              buttonText="Save to Database"
+              passwordName={passwordName}
+              setPasswordName={setPasswordName}
+            />
           </div>
           <PasswordField password={password} />
           <PasswordOptions
