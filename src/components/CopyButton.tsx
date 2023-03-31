@@ -1,10 +1,6 @@
+import clsx from 'clsx'
 import { Check, Copy } from 'lucide-react'
 import React from 'react'
-import clsx from 'clsx'
-import { decrypt, encrypt } from '../EncrypHandler'
-import { enc } from 'crypto-js'
-import { Password } from '../model/Password'
-import * as database from '../database/HandlerDB'
 
 /**
  * Type for the props of the CopyButton component
@@ -17,7 +13,6 @@ function CopyButton({ password }: CopyButtonProps) {
   const [copyStatus, setCopyStatus] = React.useState(false)
 
   /**
-   *
    * Function to copy the password to the clipboard
    */
   function copyPassword() {

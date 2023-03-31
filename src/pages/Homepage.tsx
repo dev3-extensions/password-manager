@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-chrome-extension-router'
+import { PasswordGenerator } from '../backend/PasswordGenerator'
 import CopyButton from '../components/CopyButton'
 import GenerateButton from '../components/GenerateButton'
 import PasswordField from '../components/PasswordField'
 import PasswordOptions from '../components/PasswordOptions'
 import DialogRadix from '../components/ui/Dialog'
-import { PasswordGenerator } from '../passwordGenerator'
 import SavedPasswords from './SavedPasswords'
 
-function App() {
+function Homepage() {
   // State to store the password generated
   const [password, setPassword] = useState('')
   // State to store password options
@@ -61,4 +61,4 @@ function App() {
   )
 }
 
-export default App
+export default Homepage

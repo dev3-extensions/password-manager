@@ -1,4 +1,3 @@
-import { decrypt, encrypt } from '../EncrypHandler'
 import { Password } from '../model/Password'
 
 // Constants to be used

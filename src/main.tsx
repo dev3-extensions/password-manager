@@ -1,13 +1,13 @@
 import React from 'react'
-import { goBack, goTo, Link, popToTop, Router } from 'react-chrome-extension-router'
+import { Router } from 'react-chrome-extension-router'
 import ReactDOM from 'react-dom/client'
-import './index.css'
-import App from './pages/App'
+import Homepage from './pages/Homepage'
+import './styles/index.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Router>
-      <App />
+      <Homepage />
     </Router>
   </React.StrictMode>
 )

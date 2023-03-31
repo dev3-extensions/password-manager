@@ -1,6 +1,6 @@
-import { ArrowLeft, ChevronLeft } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { Link } from 'react-chrome-extension-router'
-import App from './App'
+import Homepage from './Homepage'
 
 const SavedPasswords = () => {
   return (
@@ -8,7 +8,7 @@ const SavedPasswords = () => {
       <div className="flex flex-col gap-4 p-4">
         <p className="my-1.5 text-3xl font-bold">Saved Passwords</p>
         <div className="flex flex-col gap-2">
-          <Link component={App}>
+          <Link component={Homepage}>
             <button className="flex rounded bg-neutral-700 px-4 py-2 hover:bg-neutral-800">
               <ArrowLeft />
               <p className="pl-2">Go back</p>
