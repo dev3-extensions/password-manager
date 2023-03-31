@@ -79,7 +79,7 @@ function getPassword(element: string) {
 
     nameQuery.onsuccess = () => {
       console.log('nameQuery', nameQuery.result.password)
-      return decrypt(nameQuery.result.password.toString())
+      return nameQuery.result.password.toString()
     }
   }
 } // End of method
