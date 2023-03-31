@@ -9,12 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.13",
+    "@radix-ui/react-dialog": "^1.0.3",
+    "@radix-ui/react-popover": "^1.0.5",
     "@radix-ui/react-slider": "^1.1.0",
     "@radix-ui/react-switch": "1.0.1",
     "clsx": "^1.2.1",
     "lucide-react": "^0.109.0",
     "react": "^18.2.0",
+    "react-chrome-extension-router": "^1.4.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.9.0",
     "tailwindcss-radix": "^2.8.0"
   },
   "devDependencies": {
