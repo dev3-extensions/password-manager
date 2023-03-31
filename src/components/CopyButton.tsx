@@ -22,7 +22,6 @@ function CopyButton({ password }: CopyButtonProps) {
    */
   function copyPassword() {
     navigator.clipboard.writeText(password)
-
     // Set the copy status to true and then set it to false after 1 second
     setCopyStatus(true)
 

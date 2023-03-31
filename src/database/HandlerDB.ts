@@ -1,3 +1,4 @@
+import { decrypt, encrypt } from '../EncrypHandler'
 import { Password } from '../model/Password'
 
 // Constants to be used
@@ -59,6 +60,7 @@ function addEntry(entry: Password) {
 /**
  * It gets the password from the database using the index specified
  * @param element the indexed element to fetch from the database
+ * @returns the password to string
  */
 function getPassword(element: string) {
   const request = indexedDB.open(DB_NAME)
@@ -77,8 +79,37 @@ function getPassword(element: string) {
 
     nameQuery.onsuccess = () => {
       console.log('nameQuery', nameQuery.result.password)
+      return decrypt(nameQuery.result.password.toString())
     }
   }
 } // End of method
 
-export { initDatabase, addEntry, getPassword }
+/**
+ * It deletes an element from the database specifying the element to delete
+ * @param element The element to delete
+ */
+function deletePassword(element: string) {
+  const request = indexedDB.open(DB_NAME)
+
+  request.onsuccess = () => {
+    console.log('Reading from database')
+    const db = request.result
+    // Transaction
+    const transaction = db.transaction('passwords', 'readwrite')
+    // Store
+    const store = transaction.objectStore('passwords')
+    // Index
+    const nameIndex = store.index('name')
+    const nameKeyRequest = nameIndex.getKey([element])
+
+    nameKeyRequest.onsuccess = () => {
+      // Setting the key
+      const nameKey = nameKeyRequest.result as IDBValidKey
+      // Delete the entry
+      store.delete(nameKey)
+      console.log('Password Deleted from Database')
+    }
+  }
+}
+
+export { initDatabase, addEntry, getPassword, deletePassword }
