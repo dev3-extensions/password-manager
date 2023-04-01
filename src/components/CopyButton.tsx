@@ -30,10 +30,10 @@ function CopyButton({ password }: CopyButtonProps) {
       type="button"
       aria-label="Copy Password"
       className={clsx(
-        'ml-auto rounded-lg border px-3 py-2 shadow-lg hover:bg-blue-500/25',
+        'ml-auto rounded-lg border px-3 py-2 shadow-md hover:bg-blue-500/25',
         'border-neutral-400/50 bg-neutral-300/50',
         'dark:border-neutral-600/50 dark:bg-neutral-700/50',
-        'outline-none focus:ring-offset-2 focus:ring-offset-neutral-800 focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75'
+        'outline-none focus:ring-offset-2 focus:ring-offset-neutral-100 focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 dark:focus:ring-offset-neutral-900'
       )}
       onClick={copyPassword}
     >
