@@ -1,4 +1,4 @@
-import { PASSWORD_LENGTH } from '../constants/PasswordLength.ts'
+import { PASSWORD_LENGTH } from '../constants/PasswordLength'
 
 /**
  * String of data containing string for all password options
