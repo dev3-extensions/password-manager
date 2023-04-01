@@ -140,4 +140,3 @@ class PasswordGenerator {
 }
 
 export { PasswordGenerator }
-
