@@ -1,4 +1,4 @@
-import { PASSWORD_LENGTH } from '../constants/PasswordLength'
+import { PASSWORD_LENGTH } from '../constants/passwordLength'
 
 /**
  * String of data containing string for all password options
