@@ -1,4 +1,4 @@
-import { PASSWORD_LENGTH } from '../constants/passwordLength'
+import { PASSWORD_LENGTH } from '../constants/PasswordLength'
 
 /**
  * String of data containing string for all password options
@@ -140,3 +140,4 @@ class PasswordGenerator {
 }
 
 export { PasswordGenerator }
+
