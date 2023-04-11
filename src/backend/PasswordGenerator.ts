@@ -82,6 +82,7 @@ class PasswordGenerator {
 
   /**
    * It shuffles characters among random index
+   * using Fisher-Yates algorithm
    * @param charArray the Array of string to shuffle
    * @returns a shuffled array
    */
@@ -107,7 +108,6 @@ class PasswordGenerator {
 
   /**
    * Method which generates a random integer between 0 and Max
-   * Using Fisher-Yates algorithm
    * @param maxValue the maximum value randomly generated
    * @returns a random integer between 0 and maxValue
    */
