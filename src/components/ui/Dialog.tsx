@@ -52,7 +52,7 @@ const Dialog = ({ buttonText, passwordName, setPasswordName, password }: DialogP
               <DialogPrimitive.Close asChild>
                 <button
                   onClick={() => {
-                    addEntry(new Password(passwordName, password, 'https://google.com'))
+                    addEntry({ name: passwordName, password: password, url: 'https://google.com' })
                   }}
                   className={clsx(
                     'flex items-center gap-2 rounded-lg border px-5 py-3 font-semibold leading-none text-white shadow-md',

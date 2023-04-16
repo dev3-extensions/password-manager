@@ -1,4 +1,4 @@
-import { Password } from '../model/Password'
+import { Password, PasswordInfo } from '../model/Password'
 
 // Constants to be used
 const DB_NAME = 'passwords-list'
@@ -35,7 +35,7 @@ function initDatabase() {
  * It adds a password to the database
  * @param entry the password to add into the database
  */
-function addEntry(entry: Password) {
+function addEntry(entry: PasswordInfo) {
   // Opening the database
   const request = indexedDB.open(DB_NAME)
 

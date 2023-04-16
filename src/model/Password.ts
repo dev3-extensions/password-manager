@@ -15,4 +15,11 @@ class Password {
   }
 }
 
+export type PasswordInfo = {
+  id?: string
+  name: string
+  password: string
+  url: string
+}
+
 export { Password }
