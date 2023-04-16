@@ -1,15 +1,18 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 import { X } from 'lucide-react'
+import { addEntry } from '../../database/DatabaseHandler'
+import { Password } from '../../model/Password'
 import SaveButton from '../SaveButton'
 
 interface DialogProps {
   buttonText: string
   passwordName: string
   setPasswordName: React.Dispatch<React.SetStateAction<string>>
+  password: string
 }
 
-const Dialog = ({ buttonText, passwordName, setPasswordName }: DialogProps) => {
+const Dialog = ({ buttonText, passwordName, setPasswordName, password }: DialogProps) => {
   return (
     <DialogPrimitive.Root>
       <DialogPrimitive.Trigger>
@@ -17,7 +20,7 @@ const Dialog = ({ buttonText, passwordName, setPasswordName }: DialogProps) => {
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 bg-neutral-600/50" />
-        <DialogPrimitive.Content className="data-[state=open]:animate-contentShow fixed top-1/2 left-1/2 w-[90vw] max-w-[400px] translate-x-[-50%] translate-y-[-50%] rounded-lg bg-neutral-100 p-6 shadow-2xl focus:outline-none dark:bg-neutral-900">
+        <DialogPrimitive.Content className="data-[state=open]:animate-contentShow fixed left-1/2 top-1/2 w-[90vw] max-w-[400px] translate-x-[-50%] translate-y-[-50%] rounded-lg bg-neutral-100 p-6 shadow-2xl focus:outline-none dark:bg-neutral-900">
           <div className="flex flex-col gap-4">
             {/* Title and Description */}
             <DialogPrimitive.Title className="text-xl font-semibold">
@@ -48,6 +51,9 @@ const Dialog = ({ buttonText, passwordName, setPasswordName }: DialogProps) => {
             <div className="flex justify-end">
               <DialogPrimitive.Close asChild>
                 <button
+                  onClick={() => {
+                    addEntry(new Password(passwordName, password, 'https://google.com'))
+                  }}
                   className={clsx(
                     'flex items-center gap-2 rounded-lg border px-5 py-3 font-semibold leading-none text-white shadow-md',
                     'bg-blue-600 hover:bg-blue-600/90 active:bg-blue-700',
@@ -63,7 +69,7 @@ const Dialog = ({ buttonText, passwordName, setPasswordName }: DialogProps) => {
             {/* Close Button */}
             <DialogPrimitive.Close asChild>
               <button
-                className="absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-600"
+                className="absolute right-[10px] top-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-600"
                 aria-label="Close"
               >
                 <X />

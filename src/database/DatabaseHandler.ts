@@ -27,6 +27,8 @@ function initDatabase() {
     store.createIndex('password', ['password'], { unique: true })
     store.createIndex('url', ['url'], { unique: false })
   }
+
+  console.log('Database initialised')
 } // End of method
 
 /**
