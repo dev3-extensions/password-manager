@@ -43,10 +43,10 @@ function addEntry(entry: PasswordInfo) {
     console.log('onupgradedneeded accessed')
     const db = request.result
     // Transaction
-    const transaction = db.transaction('passwords', 'readwrite')
+    const transaction = db.transaction(DB_STORE, 'readwrite')
 
     // Initialising the store
-    const store = transaction.objectStore('passwords')
+    const store = transaction.objectStore(DB_STORE)
     // Inserting the password details on the tables according to schema
     store.put({ name: entry.name, password: entry.password, url: entry.url })
     console.log('entry added')
@@ -70,10 +70,10 @@ function getPassword(element: string) {
     console.log('Reading from database')
     const db = request.result
     // Transaction
-    const transaction = db.transaction('passwords', 'readonly')
+    const transaction = db.transaction(DB_STORE, 'readonly')
 
     // Store
-    const store = transaction.objectStore('passwords')
+    const store = transaction.objectStore(DB_STORE)
     const nameIndex = store.index('name')
     // Index
     const nameQuery = nameIndex.get([element])
@@ -96,9 +96,9 @@ function deletePassword(element: string) {
     console.log('Reading from database')
     const db = request.result
     // Transaction
-    const transaction = db.transaction('passwords', 'readwrite')
+    const transaction = db.transaction(DB_STORE, 'readwrite')
     // Store
-    const store = transaction.objectStore('passwords')
+    const store = transaction.objectStore(DB_STORE)
     // Index
     const nameIndex = store.index('name')
     const nameKeyRequest = nameIndex.getKey([element])
