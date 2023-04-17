@@ -11,19 +11,21 @@ import PasswordOptions from '../components/PasswordOptions'
 import DialogRadix from '../components/ui/Dialog'
 
 import { initDatabase } from '../database/DatabaseHandler'
+import { PasswordInfo } from '../model/Password'
 import SavedPasswords from './SavedPasswords'
 
 function Homepage() {
-  // State to store the password generated
-  const [password, setPassword] = useState('')
   // State to store password options
   const [strengthOption, setStrengthOption] = useState(1)
   const [numbersOption, setNumbersOption] = useState(true)
   const [symbolsOption, setSymbolsOption] = useState(true)
-  // Password state
-  const [passwordInfo, setPasswordInfo] = useState({ name: '', password: '', url: '' })
-  // Password name state
-  const [passwordName, setPasswordName] = useState('')
+
+  // Password state to store all the password information
+  const [passwordInfo, setPasswordInfo] = useState<PasswordInfo>({
+    name: '',
+    password: '',
+    url: '',
+  })
 
   // Initialize the database on page load
   useEffect(() => {
@@ -35,10 +37,11 @@ function Homepage() {
    */
   function handlerGeneratePassword(): void {
     let generator = new PasswordGenerator()
-    setPassword(generator.generatePassword(strengthOption, numbersOption, symbolsOption))
+    setPasswordInfo({
+      ...passwordInfo,
+      password: generator.generatePassword(strengthOption, numbersOption, symbolsOption),
+    })
   }
-
-  // setPasswordInfo({ name: 'ab', password: password, url: 'asda' })
 
   return (
     <>
@@ -47,15 +50,14 @@ function Homepage() {
           <p className="my-1.5 text-3xl font-bold">Password Manager</p>
           <div className="flex gap-2">
             <GenerateButton handler={handlerGeneratePassword} />
-            <CopyButton password={password} />
+            <CopyButton passwordInfo={passwordInfo} />
             <DialogRadix
               buttonText="Save"
-              passwordName={passwordName}
-              setPasswordName={setPasswordName}
-              password={password}
+              passwordInfo={passwordInfo}
+              setPasswordInfo={setPasswordInfo}
             />
           </div>
-          <PasswordField password={password} />
+          <PasswordField passwordInfo={passwordInfo} />
           <PasswordOptions
             setStrengthOption={setStrengthOption}
             setNumbersOption={setNumbersOption}

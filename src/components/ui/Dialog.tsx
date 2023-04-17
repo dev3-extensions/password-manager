@@ -2,17 +2,16 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 import { X } from 'lucide-react'
 import { addEntry } from '../../database/DatabaseHandler'
-import { Password } from '../../model/Password'
+import { Password, PasswordInfo } from '../../model/Password'
 import SaveButton from '../SaveButton'
 
 interface DialogProps {
   buttonText: string
-  passwordName: string
-  setPasswordName: React.Dispatch<React.SetStateAction<string>>
-  password: string
+  passwordInfo: PasswordInfo
+  setPasswordInfo: React.Dispatch<React.SetStateAction<PasswordInfo>>
 }
 
-const Dialog = ({ buttonText, passwordName, setPasswordName, password }: DialogProps) => {
+const Dialog = ({ buttonText, passwordInfo, setPasswordInfo }: DialogProps) => {
   return (
     <DialogPrimitive.Root>
       <DialogPrimitive.Trigger>
@@ -43,7 +42,7 @@ const Dialog = ({ buttonText, passwordName, setPasswordName, password }: DialogP
                 type="text"
                 readOnly={false}
                 placeholder="Enter name of website"
-                onChange={(e) => setPasswordName(e.target.value)}
+                onChange={(e) => setPasswordInfo({ ...passwordInfo, name: e.target.value })}
               />
             </fieldset>
 
@@ -52,7 +51,12 @@ const Dialog = ({ buttonText, passwordName, setPasswordName, password }: DialogP
               <DialogPrimitive.Close asChild>
                 <button
                   onClick={() => {
-                    addEntry({ name: passwordName, password: password, url: 'https://google.com' })
+                    console.log(passwordInfo)
+                    addEntry({
+                      name: passwordInfo.name,
+                      password: passwordInfo.password,
+                      url: 'https://google.com',
+                    })
                   }}
                   className={clsx(
                     'flex items-center gap-2 rounded-lg border px-5 py-3 font-semibold leading-none text-white shadow-md',

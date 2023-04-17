@@ -16,7 +16,7 @@ class Password {
 }
 
 export type PasswordInfo = {
-  id?: string
+  // id?: string
   name: string
   password: string
   url: string

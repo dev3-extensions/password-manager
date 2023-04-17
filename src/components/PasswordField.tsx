@@ -1,17 +1,18 @@
 import clsx from 'clsx'
+import { PasswordInfo } from '../model/Password'
 
 /**
  * Type for the props of the PasswordDisplay component
  */
 interface PasswordFieldProps {
-  password: string
+  passwordInfo: PasswordInfo
 }
 
-function PasswordField({ password }: PasswordFieldProps) {
+function PasswordField({ passwordInfo }: PasswordFieldProps) {
   return (
     <input
       id="password"
-      value={password}
+      value={passwordInfo.password}
       type="text"
       readOnly={true}
       className={clsx(

@@ -1,22 +1,23 @@
 import clsx from 'clsx'
 import { Check, Copy } from 'lucide-react'
 import React from 'react'
+import { PasswordInfo } from '../model/Password'
 
 /**
  * Type for the props of the CopyButton component
  */
 interface CopyButtonProps {
-  password: string
+  passwordInfo: PasswordInfo
 }
 
-function CopyButton({ password }: CopyButtonProps) {
+function CopyButton({ passwordInfo }: CopyButtonProps) {
   const [copyStatus, setCopyStatus] = React.useState(false)
 
   /**
    * Function to copy the password to the clipboard
    */
   function copyPassword() {
-    navigator.clipboard.writeText(password)
+    navigator.clipboard.writeText(passwordInfo.password)
     // Set the copy status to true and then set it to false after 1 second
     setCopyStatus(true)
 
@@ -35,7 +36,7 @@ function CopyButton({ password }: CopyButtonProps) {
         'dark:border-neutral-600/50 dark:bg-neutral-700/50',
         'outline-none focus:ring-offset-2 focus:ring-offset-neutral-100 focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 dark:focus:ring-offset-neutral-900'
       )}
-      onClick={copyPassword}
+      onClick={() => copyPassword()}
     >
       {/* Conditionally render the copy or check icon */}
       {copyStatus ? <Check size={18} /> : <Copy size={18} />}
