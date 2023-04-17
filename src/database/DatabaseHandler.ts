@@ -113,4 +113,32 @@ function deletePassword(element: string) {
   }
 }
 
-export { initDatabase, addEntry, getPassword, deletePassword }
+function getAllPasswords(): Promise<PasswordInfo[]> {
+  return new Promise((resolve, reject) => {
+    const requestInitial = indexedDB.open(DB_NAME)
+
+    requestInitial.onsuccess = () => {
+      console.log('Reading from database')
+      const db = requestInitial.result
+      // Transaction
+      const transaction = db.transaction(DB_STORE, 'readonly')
+
+      // Store
+      const objectStore = transaction.objectStore(DB_STORE)
+      // Index
+      const request = objectStore.getAll()
+
+      request.onsuccess = () => {
+        // console.log('nameQuery', request.result)
+        resolve(request.result)
+        // return nameQuery.result
+      }
+
+      request.onerror = () => {
+        reject(request.error)
+      }
+    }
+  })
+}
+
+export { initDatabase, addEntry, getPassword, deletePassword, getAllPasswords }
