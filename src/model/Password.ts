@@ -11,8 +11,15 @@ class Password {
   constructor(name: string, password: string, url: string) {
     this.name = name
     this.password = password
-    this.url = ''
+    this.url = url
   }
+}
+
+export type PasswordInfo = {
+  // id?: string
+  name: string
+  password: string
+  url: string
 }
 
 export { Password }

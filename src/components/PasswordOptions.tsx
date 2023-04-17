@@ -32,26 +32,26 @@ function PasswordOptions({
         )}
       </div>
       {isOpen && (
-        <>
-          <div className="flex items-center justify-center">
-            <p className="font-medium text-neutral-700 dark:text-neutral-300">Strength</p>
-            <div className="ml-auto">
+        <div className="flex flex-col gap-1 font-medium text-neutral-700 dark:text-neutral-300">
+          <div className="flex items-center justify-between">
+            <p>Strength</p>
+            <div>
               <Slider setStrengthOption={setStrengthOption} />
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <p className="font-medium text-neutral-700 dark:text-neutral-300">Numbers</p>
-            <div className="ml-auto">
+          <div className="flex items-center justify-between">
+            <p>Numbers</p>
+            <div>
               <Switch onCheckedChange={setNumbersOption} defaultChecked={true} />
             </div>
           </div>
-          <div className="flex items-center justify-center">
-            <p className="font-medium text-neutral-700 dark:text-neutral-300">Symbols</p>
-            <div className="ml-auto">
+          <div className="flex items-center justify-between">
+            <p>Symbols</p>
+            <div>
               <Switch onCheckedChange={setSymbolsOption} defaultChecked={true} />
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   )

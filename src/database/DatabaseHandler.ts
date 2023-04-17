@@ -1,5 +1,4 @@
-import { decrypt, encrypt } from '../EncrypHandler'
-import { Password } from '../model/Password'
+import { Password, PasswordInfo } from '../model/Password'
 
 // Constants to be used
 const DB_NAME = 'passwords-list'
@@ -28,13 +27,15 @@ function initDatabase() {
     store.createIndex('password', ['password'], { unique: true })
     store.createIndex('url', ['url'], { unique: false })
   }
+
+  console.log('Database initialised')
 } // End of method
 
 /**
  * It adds a password to the database
  * @param entry the password to add into the database
  */
-function addEntry(entry: Password) {
+function addEntry(entry: PasswordInfo) {
   // Opening the database
   const request = indexedDB.open(DB_NAME)
 
@@ -42,10 +43,10 @@ function addEntry(entry: Password) {
     console.log('onupgradedneeded accessed')
     const db = request.result
     // Transaction
-    const transaction = db.transaction('passwords', 'readwrite')
+    const transaction = db.transaction(DB_STORE, 'readwrite')
 
     // Initialising the store
-    const store = transaction.objectStore('passwords')
+    const store = transaction.objectStore(DB_STORE)
     // Inserting the password details on the tables according to schema
     store.put({ name: entry.name, password: entry.password, url: entry.url })
     console.log('entry added')
@@ -69,10 +70,10 @@ function getPassword(element: string) {
     console.log('Reading from database')
     const db = request.result
     // Transaction
-    const transaction = db.transaction('passwords', 'readonly')
+    const transaction = db.transaction(DB_STORE, 'readonly')
 
     // Store
-    const store = transaction.objectStore('passwords')
+    const store = transaction.objectStore(DB_STORE)
     const nameIndex = store.index('name')
     // Index
     const nameQuery = nameIndex.get([element])
@@ -95,9 +96,9 @@ function deletePassword(element: string) {
     console.log('Reading from database')
     const db = request.result
     // Transaction
-    const transaction = db.transaction('passwords', 'readwrite')
+    const transaction = db.transaction(DB_STORE, 'readwrite')
     // Store
-    const store = transaction.objectStore('passwords')
+    const store = transaction.objectStore(DB_STORE)
     // Index
     const nameIndex = store.index('name')
     const nameKeyRequest = nameIndex.getKey([element])
@@ -112,4 +113,32 @@ function deletePassword(element: string) {
   }
 }
 
-export { initDatabase, addEntry, getPassword, deletePassword }
+function getAllPasswords(): Promise<PasswordInfo[]> {
+  return new Promise((resolve, reject) => {
+    const requestInitial = indexedDB.open(DB_NAME)
+
+    requestInitial.onsuccess = () => {
+      console.log('Reading from database')
+      const db = requestInitial.result
+      // Transaction
+      const transaction = db.transaction(DB_STORE, 'readonly')
+
+      // Store
+      const objectStore = transaction.objectStore(DB_STORE)
+      // Index
+      const request = objectStore.getAll()
+
+      request.onsuccess = () => {
+        // console.log('nameQuery', request.result)
+        resolve(request.result)
+        // return nameQuery.result
+      }
+
+      request.onerror = () => {
+        reject(request.error)
+      }
+    }
+  })
+}
+
+export { initDatabase, addEntry, getPassword, deletePassword, getAllPasswords }

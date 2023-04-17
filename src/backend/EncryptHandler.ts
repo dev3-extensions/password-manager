@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js'
-import { PasswordGenerator } from './passwordGenerator'
+import { PasswordGenerator } from './PasswordGenerator'
 
 let pg = new PasswordGenerator()
 

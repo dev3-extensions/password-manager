@@ -23,7 +23,7 @@ function Slider({ setStrengthOption }: SliderProps) {
       <SliderPrimitive.Thumb
         className={clsx(
           'block h-5 w-5 rounded-full bg-blue-500 dark:bg-white',
-          'focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 focus:ring-offset-2 focus:ring-offset-neutral-800'
+          'focus:outline-none focus:ring-offset-2 focus:ring-offset-neutral-100 focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 dark:focus:ring-offset-neutral-900'
         )}
       />
     </SliderPrimitive.Root>
