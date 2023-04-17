@@ -1,26 +1,55 @@
+import clsx from 'clsx'
 import { ArrowLeft } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-chrome-extension-router'
+import CopyButton from '../components/CopyButton'
+import { getAllPasswords } from '../database/DatabaseHandler'
+import { Password, PasswordInfo } from '../model/Password'
 import Homepage from './Homepage'
 
 const SavedPasswords = () => {
+  const [passwords, setPasswords] = useState<PasswordInfo[]>([])
+
+  useEffect(() => {
+    getAllPasswords().then((passwords: PasswordInfo[]) => {
+      setPasswords(passwords)
+    })
+  }, [])
+
   return (
-    <div className="min-h-[500px] w-[370px] bg-neutral-100 dark:bg-neutral-900">
+    <div className="h-[500px] w-[370px] overflow-y-auto bg-neutral-100 text-neutral-950 dark:bg-neutral-900 dark:text-neutral-50">
       <div className="flex flex-col gap-4 p-4">
         <p className="my-1.5 text-3xl font-bold">Saved Passwords</p>
         <div className="flex flex-col gap-2">
-          <Link component={Homepage}>
-            <button className="flex rounded bg-neutral-700 px-4 py-2 hover:bg-neutral-800">
-              <ArrowLeft />
-              <p className="pl-2">Go back</p>
-            </button>
+          <Link
+            className="flex w-max rounded-full border border-neutral-400/50 bg-neutral-300/50 px-4 py-2 hover:bg-blue-500/25 dark:border-neutral-600/50 dark:bg-neutral-700/50"
+            component={Homepage}
+          >
+            <ArrowLeft />
+            <p className="pl-2">Go back</p>
           </Link>
-          <div className="flex items-center justify-between">
-            <h1>Facebook</h1>
-            <button className="rounded-lg bg-neutral-600 px-4 py-1 text-xs">View Details</button>
-          </div>
-          <div className="flex items-center justify-between">
-            <h1>Google</h1>
-            <button className="rounded-lg bg-neutral-600 px-4 py-1 text-xs">View Details</button>
+          <div className="flex flex-col gap-4 divide-y divide-neutral-700">
+            {passwords.map((password) => (
+              <div className="flex flex-col gap-1">
+                <div className="mt-2 flex place-content-between items-center">
+                  <p className="text-lg font-semibold">{password.name}</p>
+                  <p className="text-sm">{password.url}</p>
+                </div>
+                <div className="flex gap-2">
+                  <input
+                    className={clsx(
+                      'w-full rounded-lg border border-neutral-400/50 bg-neutral-400/10 p-2.5 font-mono font-medium shadow-md outline-none',
+                      'dark:border-neutral-700 dark:bg-neutral-700/10',
+                      'hover:ring-1 hover:ring-blue-600/50 focus:ring-2 focus:ring-blue-600'
+                    )}
+                    type="text"
+                    value={password.password}
+                    readOnly
+                  />
+                  <CopyButton passwordInfo={password} />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
