@@ -1,4 +1,5 @@
 import { Password, PasswordInfo } from '../model/Password'
+import { encrypt, decrypt } from '../backend/EncryptHandler'
 
 // Constants to be used
 const DB_NAME = 'passwords-list'
@@ -47,8 +48,11 @@ function addEntry(entry: PasswordInfo) {
 
     // Initialising the store
     const store = transaction.objectStore(DB_STORE)
+    // Encrypting password
+    let encryptedPassword: string = encrypt(entry.password).toString()
+
     // Inserting the password details on the tables according to schema
-    store.put({ name: entry.name, password: entry.password, url: entry.url })
+    store.put({ name: entry.name, password: encryptedPassword, url: entry.url })
     console.log('entry added')
 
     if (request.readyState == 'done') {
