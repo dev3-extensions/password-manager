@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import { Save } from 'lucide-react'
 
-interface SaveButtonProps {
+type SaveButtonProps = {
   buttonText: string
 }
 
-function SaveButton({ buttonText }: SaveButtonProps) {
+export const SaveButton = ({ buttonText }: SaveButtonProps) => {
   return (
     <button
       type="button"
@@ -21,5 +21,3 @@ function SaveButton({ buttonText }: SaveButtonProps) {
     </button>
   )
 }
-
-export default SaveButton

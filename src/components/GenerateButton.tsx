@@ -4,11 +4,11 @@ import { RefreshCw } from 'lucide-react'
 /**
  * Type for the props of the GenerateButton component
  */
-interface GenerateButtonProps {
+type GenerateButtonProps = {
   handler: () => void
 }
 
-function GenerateButton({ handler }: GenerateButtonProps) {
+export const GenerateButton = ({ handler }: GenerateButtonProps) => {
   return (
     <button
       type="button"
@@ -26,5 +26,3 @@ function GenerateButton({ handler }: GenerateButtonProps) {
     </button>
   )
 }
-
-export default GenerateButton

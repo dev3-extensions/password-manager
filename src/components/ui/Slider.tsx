@@ -1,11 +1,11 @@
 import * as SliderPrimitive from '@radix-ui/react-slider'
 import { clsx } from 'clsx'
 
-interface SliderProps {
+type SliderProps = {
   setStrengthOption: React.Dispatch<React.SetStateAction<number>>
 }
 
-function Slider({ setStrengthOption }: SliderProps) {
+export const Slider = ({ setStrengthOption }: SliderProps) => {
   return (
     <SliderPrimitive.Root
       defaultValue={[50]}
@@ -29,5 +29,3 @@ function Slider({ setStrengthOption }: SliderProps) {
     </SliderPrimitive.Root>
   )
 }
-
-export default Slider
