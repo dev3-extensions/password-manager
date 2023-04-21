@@ -43,6 +43,9 @@ function Homepage() {
     })
   }
 
+  console.log(import.meta.env.VITE_TESTKEY)
+  console.log(import.meta.env.VITE_SECRET_ENCRYPTION_KEY)
+
   return (
     <>
       <div className="min-h-[420px] w-[370px] bg-neutral-100 text-neutral-950 dark:bg-neutral-900 dark:text-neutral-50">
