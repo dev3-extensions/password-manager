@@ -1,5 +1,5 @@
-import { Password, PasswordInfo } from '../model/Password'
-import { encrypt, decrypt } from '../backend/EncryptHandler'
+import { encrypt } from '~/backend/EncryptHandler'
+import { PasswordInfo } from '~/types/Password'
 
 // Constants to be used
 const DB_NAME = 'passwords-list'

@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js'
-import { PasswordGenerator } from './PasswordGenerator'
+
+import { PasswordGenerator } from '~/backend/PasswordGenerator'
 
 const STORAGE_KEY = 'key'
 const MASTER_KEY = import.meta.env.VITE_MASTER_KEY

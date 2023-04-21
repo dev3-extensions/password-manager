@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import Slider from './ui/Slider'
 import Switch from './ui/Switch'
 
-interface PasswordOptionsProps {
+import { Slider } from '~/components/ui/Slider'
+import { Switch } from '~/components/ui/Switch'
   setStrengthOption: React.Dispatch<React.SetStateAction<number>>
   setNumbersOption: React.Dispatch<React.SetStateAction<boolean>>
   setSymbolsOption: React.Dispatch<React.SetStateAction<boolean>>

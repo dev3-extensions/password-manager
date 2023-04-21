@@ -5,7 +5,10 @@ import { addEntry } from '../../database/DatabaseHandler'
 import { Password, PasswordInfo } from '../../model/Password'
 import SaveButton from '../SaveButton'
 
-interface DialogProps {
+import { SaveButton } from '~/components/SaveButton'
+import { addEntry } from '~/database/DatabaseHandler'
+import { PasswordInfo } from '~/types/Password'
+
   buttonText: string
   passwordInfo: PasswordInfo
   setPasswordInfo: React.Dispatch<React.SetStateAction<PasswordInfo>>

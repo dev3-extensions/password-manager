@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import { PasswordInfo } from '../model/Password'
+
+import { PasswordInfo } from '~/types/Password'
 
 /**
  * Type for the props of the PasswordDisplay component
