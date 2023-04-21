@@ -2,12 +2,13 @@ import clsx from 'clsx'
 import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-chrome-extension-router'
-import CopyButton from '../components/CopyButton'
-import { getAllPasswords } from '../database/DatabaseHandler'
-import { Password, PasswordInfo } from '../model/Password'
-import Homepage from './Homepage'
 
-const SavedPasswords = () => {
+import { CopyButton } from '~/components/CopyButton'
+import { getAllPasswords } from '~/database/DatabaseHandler'
+import { MainPage } from '~/pages/MainPage'
+import { PasswordInfo } from '~/types/Password'
+
+export const SavedPasswordsPage = () => {
   const [passwords, setPasswords] = useState<PasswordInfo[]>([])
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const SavedPasswords = () => {
         <div className="flex flex-col gap-2">
           <Link
             className="flex w-max rounded-full border border-neutral-400/50 bg-neutral-300/50 px-4 py-2 hover:bg-blue-500/25 dark:border-neutral-600/50 dark:bg-neutral-700/50"
-            component={Homepage}
+            component={MainPage}
           >
             <ArrowLeft />
             <p className="pl-2">Go back</p>
@@ -56,5 +57,3 @@ const SavedPasswords = () => {
     </div>
   )
 }
-
-export default SavedPasswords
