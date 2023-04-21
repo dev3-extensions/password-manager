@@ -1,8 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_TESTKEY: string
-  readonly VITE_SECRET_ENCRYPTION_KEY: string
+  readonly VITE_MASTER_KEY: string
   // more env variables...
 }
 

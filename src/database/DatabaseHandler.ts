@@ -41,7 +41,6 @@ function addEntry(entry: PasswordInfo) {
   const request = indexedDB.open(DB_NAME)
 
   request.onsuccess = () => {
-    console.log('onupgradedneeded accessed')
     const db = request.result
     // Transaction
     const transaction = db.transaction(DB_STORE, 'readwrite')
@@ -49,11 +48,10 @@ function addEntry(entry: PasswordInfo) {
     // Initialising the store
     const store = transaction.objectStore(DB_STORE)
     // Encrypting password
-    let encryptedPassword: string = encrypt(entry.password).toString()
+    let encryptedPassword: string = encrypt(entry.password)!.toString()
 
     // Inserting the password details on the tables according to schema
     store.put({ name: entry.name, password: encryptedPassword, url: entry.url })
-    console.log('entry added')
 
     if (request.readyState == 'done') {
       console.log('Data added')

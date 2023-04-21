@@ -51,11 +51,10 @@ const Dialog = ({ buttonText, passwordInfo, setPasswordInfo }: DialogProps) => {
               <DialogPrimitive.Close asChild>
                 <button
                   onClick={() => {
-                    console.log(passwordInfo)
                     addEntry({
                       name: passwordInfo.name,
                       password: passwordInfo.password,
-                      url: 'https://google.com',
+                      url: 'https://google.com', // TODO: Change URL accordingly
                     })
                   }}
                   className={clsx(

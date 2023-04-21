@@ -1,25 +1,8 @@
 import CryptoJS from 'crypto-js'
 import { PasswordGenerator } from './PasswordGenerator'
 
-let pg = new PasswordGenerator()
-
-// The passphrase used to generate the key
-// TODO: Might generate a bug
-let passphrase = pg.generatePassword(32, true, true)
-
-// Salt generated from random wordarray
-let salt = CryptoJS.lib.WordArray.random(256)
-
-/**
- * Generating a key using PBKDF2 to not have a plain text passphrase
- */
-let key256Bit: string = CryptoJS.PBKDF2(passphrase, salt, {
-  keySize: 256,
-  iterations: 10000,
-}).toString()
-
-// Encoding the key
-let key: string = CryptoJS.enc.Hex.parse(key256Bit).toString()
+const STORAGE_KEY = 'key'
+const MASTER_KEY = import.meta.env.VITE_MASTER_KEY
 
 /**
  * It encrypts a string using AES-256 bit encryption
@@ -27,11 +10,17 @@ let key: string = CryptoJS.enc.Hex.parse(key256Bit).toString()
  * @returns an encrypted string
  */
 const encrypt = (input: string) => {
-  const encryptedText = CryptoJS.AES.encrypt(input, key, {
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Iso97971,
-  })
-  return encryptedText
+  if (!isStorageEmpty()) {
+    // TODO: Refactor below
+    const encryptedKey = localStorage.getItem(STORAGE_KEY)!
+    const decryptedKey = CryptoJS.AES.decrypt(encryptedKey, MASTER_KEY).toString()
+
+    const encryptedText = CryptoJS.AES.encrypt(input, decryptedKey, {
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Iso97971,
+    })
+    return encryptedText
+  }
 }
 
 /**
@@ -40,7 +29,11 @@ const encrypt = (input: string) => {
  * @returns a plain string with original password
  */
 const decrypt = (ciphertext: string | CryptoJS.lib.CipherParams) => {
-  const bytes = CryptoJS.AES.decrypt(ciphertext, key, {
+  // TODO: Refactor below
+  const encryptedKey = localStorage.getItem(STORAGE_KEY)!
+  const decryptedKey = CryptoJS.AES.decrypt(encryptedKey, MASTER_KEY).toString()
+
+  const bytes = CryptoJS.AES.decrypt(ciphertext, decryptedKey, {
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Iso97971,
   })
@@ -48,4 +41,45 @@ const decrypt = (ciphertext: string | CryptoJS.lib.CipherParams) => {
   return originalText
 }
 
-export { encrypt, decrypt }
+/**
+ * It initialise the local storage where the Master Key is stored
+ * encrypted using AES-256.
+ */
+const initStorage = () => {
+  if (isStorageEmpty()) {
+    let pg = new PasswordGenerator()
+
+    // The passphrase used to generate the key
+    let passphrase = pg.generatePassword(32, true, true)
+
+    // Salt generated from random wordarray
+    let salt = CryptoJS.lib.WordArray.random(256)
+
+    /**
+     * Generating a key using PBKDF2 to not have a plain text passphrase
+     */
+    let key256Bit: string = CryptoJS.PBKDF2(passphrase, salt, {
+      keySize: 256,
+      iterations: 10000,
+    }).toString()
+
+    // Encoding the key
+    let key: string = CryptoJS.enc.Hex.parse(key256Bit).toString()
+    // Encrypting the key using master password
+    let encryptedKey = CryptoJS.AES.encrypt(key, MASTER_KEY).toString()
+    // Storing into local storage
+    localStorage.setItem(STORAGE_KEY, encryptedKey.toString())
+  }
+}
+
+/**
+ * It checks if the local storage has the key.
+ * @returns true if local storage is empty, false otherwise
+ */
+const isStorageEmpty = (): boolean => {
+  if (localStorage.getItem(STORAGE_KEY) == null) {
+    return true
+  } else return false
+}
+
+export { encrypt, decrypt, initStorage }

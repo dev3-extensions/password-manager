@@ -13,6 +13,7 @@ import DialogRadix from '../components/ui/Dialog'
 import { initDatabase } from '../database/DatabaseHandler'
 import { PasswordInfo } from '../model/Password'
 import SavedPasswords from './SavedPasswords'
+import { initStorage } from '../backend/EncryptHandler'
 
 function Homepage() {
   // State to store password options
@@ -27,9 +28,12 @@ function Homepage() {
     url: '',
   })
 
-  // Initialize the database on page load
+  // Page Load
   useEffect(() => {
+    // Initialising Database
     initDatabase()
+    // Initialising Local Storage
+    initStorage()
   }, [])
 
   /**
@@ -42,9 +46,6 @@ function Homepage() {
       password: generator.generatePassword(strengthOption, numbersOption, symbolsOption),
     })
   }
-
-  console.log(import.meta.env.VITE_TESTKEY)
-  console.log(import.meta.env.VITE_SECRET_ENCRYPTION_KEY)
 
   return (
     <>
