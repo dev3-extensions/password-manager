@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js'
-import { PasswordGenerator } from './PasswordGenerator'
+
+import { PasswordGenerator } from '~/backend/PasswordGenerator'
 
 const STORAGE_KEY = 'key'
 const MASTER_KEY = import.meta.env.VITE_MASTER_KEY
@@ -9,7 +10,7 @@ const MASTER_KEY = import.meta.env.VITE_MASTER_KEY
  * @param input The password to encrypt
  * @returns an encrypted string
  */
-const encrypt = (input: string) => {
+export const encrypt = (input: string) => {
   if (!isStorageEmpty()) {
     // TODO: Refactor below
     const encryptedKey = localStorage.getItem(STORAGE_KEY)!
@@ -28,7 +29,7 @@ const encrypt = (input: string) => {
  * @param ciphertext the cipher to decrypt the password
  * @returns a plain string with original password
  */
-const decrypt = (ciphertext: string | CryptoJS.lib.CipherParams) => {
+export const decrypt = (ciphertext: string | CryptoJS.lib.CipherParams) => {
   // TODO: Refactor below
   const encryptedKey = localStorage.getItem(STORAGE_KEY)!
   const decryptedKey = CryptoJS.AES.decrypt(encryptedKey, MASTER_KEY).toString()
@@ -45,7 +46,7 @@ const decrypt = (ciphertext: string | CryptoJS.lib.CipherParams) => {
  * It initialise the local storage where the Master Key is stored
  * encrypted using AES-256.
  */
-const initStorage = () => {
+export const initStorage = () => {
   if (isStorageEmpty()) {
     let pg = new PasswordGenerator()
 
@@ -81,5 +82,3 @@ const isStorageEmpty = (): boolean => {
     return true
   } else return false
 }
-
-export { encrypt, decrypt, initStorage }

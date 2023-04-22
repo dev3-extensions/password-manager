@@ -1,14 +1,15 @@
 import clsx from 'clsx'
-import { PasswordInfo } from '../model/Password'
+
+import { PasswordInfo } from '~/types/Password'
 
 /**
  * Type for the props of the PasswordDisplay component
  */
-interface PasswordFieldProps {
+type PasswordFieldProps = {
   passwordInfo: PasswordInfo
 }
 
-function PasswordField({ passwordInfo }: PasswordFieldProps) {
+export const PasswordField = ({ passwordInfo }: PasswordFieldProps) => {
   return (
     <input
       id="password"
@@ -23,5 +24,3 @@ function PasswordField({ passwordInfo }: PasswordFieldProps) {
     />
   )
 }
-
-export default PasswordField

@@ -1,25 +1,25 @@
 import clsx from 'clsx'
 import { Check, Copy } from 'lucide-react'
 import React from 'react'
-import { decrypt } from '../backend/EncryptHandler'
-import { PASSWORD_LENGTH } from '../constants/PasswordLength'
-import { PasswordInfo } from '../model/Password'
-import PasswordOptions from './PasswordOptions'
+
+import { decrypt } from '~/backend/EncryptHandler'
+import { PASSWORD_LENGTH } from '~/constants/PasswordLength'
+import { PasswordInfo } from '~/types/Password'
 
 /**
  * Type for the props of the CopyButton component
  */
-interface CopyButtonProps {
+type CopyButtonProps = {
   passwordInfo: PasswordInfo
 }
 
-function CopyButton({ passwordInfo }: CopyButtonProps) {
+export const CopyButton = ({ passwordInfo }: CopyButtonProps) => {
   const [copyStatus, setCopyStatus] = React.useState(false)
 
   /**
    * Function to copy the password to the clipboard
    */
-  function copyPassword() {
+  const copyPassword = () => {
     // TODO: Using different buttons to decrypt password
     if (passwordInfo.password.length > PASSWORD_LENGTH.LONG) {
       let decryptedPassword = decrypt(passwordInfo.password)
@@ -51,5 +51,3 @@ function CopyButton({ passwordInfo }: CopyButtonProps) {
     </button>
   )
 }
-
-export default CopyButton

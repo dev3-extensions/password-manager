@@ -1,5 +1,5 @@
-import { Password, PasswordInfo } from '../model/Password'
-import { encrypt, decrypt } from '../backend/EncryptHandler'
+import { encrypt } from '~/backend/EncryptHandler'
+import { PasswordInfo } from '~/types/Password'
 
 // Constants to be used
 const DB_NAME = 'passwords-list'
@@ -8,7 +8,7 @@ const DB_STORE = 'passwords'
 /**
  * It initialise the connection to the database and on first connection it creates the schema
  */
-function initDatabase() {
+export const initDatabase = () => {
   const openRequest = globalThis.indexedDB.open(DB_NAME)
   let db: IDBDatabase | null = null
 
@@ -36,7 +36,7 @@ function initDatabase() {
  * It adds a password to the database
  * @param entry the password to add into the database
  */
-function addEntry(entry: PasswordInfo) {
+export const addEntry = (entry: PasswordInfo) => {
   // Opening the database
   const request = indexedDB.open(DB_NAME)
 
@@ -65,7 +65,7 @@ function addEntry(entry: PasswordInfo) {
  * @param element the indexed element to fetch from the database
  * @returns the password to string
  */
-function getPassword(element: string) {
+export const getPassword = (element: string) => {
   const request = indexedDB.open(DB_NAME)
 
   request.onsuccess = () => {
@@ -91,7 +91,7 @@ function getPassword(element: string) {
  * It deletes an element from the database specifying the element to delete
  * @param element The element to delete
  */
-function deletePassword(element: string) {
+export const deletePassword = (element: string) => {
   const request = indexedDB.open(DB_NAME)
 
   request.onsuccess = () => {
@@ -115,7 +115,7 @@ function deletePassword(element: string) {
   }
 }
 
-function getAllPasswords(): Promise<PasswordInfo[]> {
+export const getAllPasswords = (): Promise<PasswordInfo[]> => {
   return new Promise((resolve, reject) => {
     const requestInitial = indexedDB.open(DB_NAME)
 
@@ -142,5 +142,3 @@ function getAllPasswords(): Promise<PasswordInfo[]> {
     }
   })
 }
-
-export { initDatabase, addEntry, getPassword, deletePassword, getAllPasswords }
