@@ -2,19 +2,20 @@ import clsx from 'clsx'
 import { List } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-chrome-extension-router'
-import { PasswordGenerator } from '../backend/PasswordGenerator'
 
-import CopyButton from '../components/CopyButton'
-import GenerateButton from '../components/GenerateButton'
-import PasswordField from '../components/PasswordField'
-import PasswordOptions from '../components/PasswordOptions'
-import DialogRadix from '../components/ui/Dialog'
+import { CopyButton } from '~/components/CopyButton'
+import { GenerateButton } from '~/components/GenerateButton'
+import { PasswordField } from '~/components/PasswordField'
+import { PasswordOptions } from '~/components/PasswordOptions'
+import { Dialog } from '~/components/ui/Dialog'
 
-import { initDatabase } from '../database/DatabaseHandler'
-import { PasswordInfo } from '../model/Password'
-import SavedPasswords from './SavedPasswords'
+import { initStorage } from '~/backend/EncryptHandler'
+import { PasswordGenerator } from '~/backend/PasswordGenerator'
+import { initDatabase } from '~/database/DatabaseHandler'
+import { SavedPasswordsPage } from '~/pages/SavedPasswordsPage'
+import { PasswordInfo } from '~/types/Password'
 
-function Homepage() {
+export const MainPage = () => {
   // State to store password options
   const [strengthOption, setStrengthOption] = useState(1)
   const [numbersOption, setNumbersOption] = useState(true)
@@ -27,15 +28,18 @@ function Homepage() {
     url: '',
   })
 
-  // Initialize the database on page load
+  // Runs on page load (only once due to empty dependency array)
   useEffect(() => {
+    // Initialising Database
     initDatabase()
+    // Initialising Local Storage
+    initStorage()
   }, [])
 
   /**
    * Password handler to generate the password
    */
-  function handlerGeneratePassword(): void {
+  const handlerGeneratePassword = (): void => {
     let generator = new PasswordGenerator()
     setPasswordInfo({
       ...passwordInfo,
@@ -51,7 +55,7 @@ function Homepage() {
           <div className="flex gap-2">
             <GenerateButton handler={handlerGeneratePassword} />
             <CopyButton passwordInfo={passwordInfo} />
-            <DialogRadix
+            <Dialog
               buttonText="Save"
               passwordInfo={passwordInfo}
               setPasswordInfo={setPasswordInfo}
@@ -65,7 +69,7 @@ function Homepage() {
           />
           <div className="mt-2 flex items-center justify-center">
             <Link
-              component={SavedPasswords}
+              component={SavedPasswordsPage}
               className={clsx(
                 'flex w-fit items-center gap-2 rounded-lg border px-4 py-2 font-semibold shadow-md',
                 'border-neutral-400/50 bg-neutral-300/50 hover:bg-blue-500/25 dark:border-neutral-600/50 dark:bg-neutral-700/50',
@@ -81,5 +85,3 @@ function Homepage() {
     </>
   )
 }
-
-export default Homepage

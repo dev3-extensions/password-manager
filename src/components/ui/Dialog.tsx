@@ -1,17 +1,18 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 import { X } from 'lucide-react'
-import { addEntry } from '../../database/DatabaseHandler'
-import { Password, PasswordInfo } from '../../model/Password'
-import SaveButton from '../SaveButton'
 
-interface DialogProps {
+import { SaveButton } from '~/components/SaveButton'
+import { addEntry } from '~/database/DatabaseHandler'
+import { PasswordInfo } from '~/types/Password'
+
+type DialogProps = {
   buttonText: string
   passwordInfo: PasswordInfo
   setPasswordInfo: React.Dispatch<React.SetStateAction<PasswordInfo>>
 }
 
-const Dialog = ({ buttonText, passwordInfo, setPasswordInfo }: DialogProps) => {
+export const Dialog = ({ buttonText, passwordInfo, setPasswordInfo }: DialogProps) => {
   return (
     <DialogPrimitive.Root>
       <DialogPrimitive.Trigger>
@@ -34,8 +35,8 @@ const Dialog = ({ buttonText, passwordInfo, setPasswordInfo }: DialogProps) => {
               </label>
               <input
                 className={clsx(
-                  'w-full rounded-lg border border-neutral-400/50 bg-neutral-400/10 p-2.5 font-medium shadow-md outline-none',
-                  'dark:border-neutral-700 dark:bg-neutral-700/10',
+                  'w-full rounded-lg border p-2.5 font-medium shadow-md outline-none',
+                  'border-neutral-400/50 bg-neutral-400/10 dark:border-neutral-700 dark:bg-neutral-700/10',
                   'hover:ring-1 hover:ring-blue-600/50 focus:ring-2 focus:ring-blue-600'
                 )}
                 id="name"
@@ -51,17 +52,15 @@ const Dialog = ({ buttonText, passwordInfo, setPasswordInfo }: DialogProps) => {
               <DialogPrimitive.Close asChild>
                 <button
                   onClick={() => {
-                    console.log(passwordInfo)
                     addEntry({
                       name: passwordInfo.name,
                       password: passwordInfo.password,
-                      url: 'https://google.com',
+                      url: 'https://google.com', // TODO: Change URL accordingly
                     })
                   }}
                   className={clsx(
                     'flex items-center gap-2 rounded-lg border px-5 py-3 font-semibold leading-none text-white shadow-md',
-                    'bg-blue-600 hover:bg-blue-600/90 active:bg-blue-700',
-                    'border-neutral-300/50 dark:border-neutral-700',
+                    'border-neutral-300/50 bg-blue-600 hover:bg-blue-600/90 active:bg-blue-700 dark:border-neutral-700',
                     'outline-none focus:ring-offset-2 focus:ring-offset-neutral-100 focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 dark:focus:ring-offset-neutral-900'
                   )}
                 >
@@ -85,5 +84,3 @@ const Dialog = ({ buttonText, passwordInfo, setPasswordInfo }: DialogProps) => {
     </DialogPrimitive.Root>
   )
 }
-
-export default Dialog
