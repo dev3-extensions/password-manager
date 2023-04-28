@@ -52,10 +52,14 @@ export const Dialog = ({ buttonText, passwordInfo, setPasswordInfo }: DialogProp
               <DialogPrimitive.Close asChild>
                 <button
                   onClick={() => {
-                    addEntry({
-                      name: passwordInfo.name,
-                      password: passwordInfo.password,
-                      url: 'https://google.com', // TODO: Change URL accordingly
+                    let queryOptions = { active: true, lastFocusedWindow: true }
+                    chrome.tabs.query(queryOptions, (tab) => {
+                      let url = new URL(tab[0].url!)
+                      addEntry({
+                        name: passwordInfo.name,
+                        password: passwordInfo.password,
+                        url: url.hostname,
+                      })
                     })
                   }}
                   className={clsx(
